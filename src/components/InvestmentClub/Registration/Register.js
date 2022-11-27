@@ -106,13 +106,13 @@ const Register = () => {
           <div className={styles.overlay}></div>
         </div>
 
-        <div className="container md:w-4/5 mx-auto bg-white p-5 drop-shadow-md relative -top-[120px] z-[10] rounded-3xl">
-          <div className="p-8 bg-white">
+        <div className="container w-full md:w-4/5 mx-auto bg-white p-2 md:p-5 drop-shadow-md relative -top-[120px] z-[10] rounded-3xl">
+          <div className="md:p-8 bg-white">
             <div className="w-24 flex items-center justify-center text-titaniumOrange cursor-pointer">
               <BiChevronLeft className=" text-2xl" />
               <span className="text-base">back</span>
             </div>
-            <h4 className="text-blueShade500 text-[20px] mx-3">
+            <h4 className="text-blueShade500 md:text-[20px] mx-3">
               Complete the form below to be part of the community
             </h4>
           </div>
@@ -122,7 +122,7 @@ const Register = () => {
               e.preventDefault();
               handleSubmit();
             }}
-            className="flex flex-col justify-between bg-white p-8 mt-3"
+            className="flex flex-col justify-between bg-white md:p-8 mt-3"
           >
             <div className="flex flex-col md:flex-row justify-between mb-3">
               <div className="w-full p-2 md:w-1/2">
@@ -397,7 +397,7 @@ const Register = () => {
             ) : (
               <button
                 type="submit"
-                className="w-[408px] mx-auto py-3 px-6 text-white font-semibold bg-titaniumOrange rounded-full"
+                className="w-[300px] md:w-[408px] mx-auto py-3 px-6 text-white font-semibold bg-titaniumOrange rounded-full"
               >
                 SUBMIT
               </button>

@@ -3,30 +3,37 @@ module.exports = {
     {
       url: "/",
       name: "Home",
+      icon: "",
     },
     {
       url: "/#about",
       name: "About Us",
+      icon: "",
     },
     {
       url: "/#services",
       name: "Services",
+      icon: "",
     },
     {
       url: "/investment_club",
       name: "Investment Club",
+      icon: "",
     },
     {
       url: "/properties",
       name: "Properties",
+      icon: "",
     },
     {
       url: "/#contact",
       name: "Contact us",
+      icon: "",
     },
     {
       url: "/policy",
       name: "Private Policy",
+      icon: "",
     },
   ],
   clubPlanBenefits: [

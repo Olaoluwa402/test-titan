@@ -43,21 +43,21 @@ function HeroSelecBar() {
           {selectLocation}
         </select>
       </div>
-      <Image src={border_rigth} alt="border" width={2} height={90} />
+      <Image src={border_rigth} alt="border" width={2} height={80} />
       <div className={styles.bedroomWrapper}>
         <select>
           <option>{settings[0].selectBedroomAmountPlaceholder}</option>
           {selectBedroomAmount}
         </select>
       </div>
-      <Image src={border_rigth} alt="border" width={2} height={90} />
+      <Image src={border_rigth} alt="border" width={2} height={80} />
       <div className={styles.priceWrapper}>
         <select>
           <option>{settings[0].selectPriceRangePlaceholder}</option>
           {selectPriceRange}
         </select>
       </div>
-      <Image src={border_rigth} alt="border" width={2} height={90} />
+      <Image src={border_rigth} alt="border" width={2} height={80} />
       <div className={styles.propertyWrapper}>
         <select>
           <option value="">{settings[0].selectPropertyPlaceholder}</option>

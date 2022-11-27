@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useSelector } from "react-redux";
 import about_border from "../../../asset/images/about_border.png";
 import vision from "../../../asset/images/vision.png";
+import Title from "../Title/Title";
 
 function About() {
   const store = useSelector((store) => store.homeData.data);
@@ -14,8 +15,7 @@ function About() {
     <div className={styles.generalContainer}>
       {/* home */}
       <div className={styles.container} id="about">
-        <h2 className={styles.aboutTittle}>{settings[0].aboutUsTitle}</h2>
-        <Image src={about_border} alt="aboutus" width={73} height={3} />
+        <Title>{settings[0].aboutUsTitle}</Title>
         <p className={styles.aboutText}>{settings[0].aboutUsText}</p>
 
         <div className="w-full flex justify-center items-center">
@@ -48,7 +48,7 @@ function About() {
               <h2 className={styles.vision__Title}>
                 {settings[0].ourVisionTitle}
               </h2>
-              <hr className="my-4 w-[80px] h-[4px] bg-gray-200 sm:bg-titaniumOrange border-0 dark:bg-gray-700" />
+              <hr className="my-4 w-[80px] h-[4px] bg-titaniumOrange border-0 dark:bg-gray-700" />
               <p className={styles.vision__Text}>{settings[0].ourVisionText}</p>
             </div>
           </div>
@@ -58,8 +58,8 @@ function About() {
       {/* our values */}
       <div className={styles.valuesContainer}>
         <div className={styles.valueTop}>
-          <h2 className={styles.valueTitle}>{values[0].title}</h2>
-          <hr className="my-4 w-[80px] h-[4px] bg-gray-200 sm:bg-titaniumOrange border-0 dark:bg-gray-700" />
+          <Title>{values[0].title}</Title>
+
           <p className={styles.visionText}>{values[0].desc}</p>
         </div>
         <div className={styles.cardContainer}>
@@ -87,7 +87,7 @@ function About() {
           <div className="p-4 md:p-6">
             <div className="max-w-[550px]">
               <h2 className={styles.service__Title}>{services[0].title}</h2>
-              <hr className="my-4 w-[80px] h-[4px] bg-gray-200 sm:bg-titaniumOrange border-0 dark:bg-gray-700" />
+              <hr className="my-4 w-[80px] h-[4px] bg-titaniumOrange border-0 dark:bg-gray-700" />
               <p className={styles.service__Text}>{services[0].desc}</p>
             </div>
           </div>

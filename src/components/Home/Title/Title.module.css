@@ -11,6 +11,12 @@
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
-  font-size: 40px;
+  font-size: 30px;
   line-height: 61px;
+}
+
+@media (min-width: 780px) {
+  .title {
+    font-size: 40px;
+  }
 }

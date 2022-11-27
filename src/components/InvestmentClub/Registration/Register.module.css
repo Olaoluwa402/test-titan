@@ -32,8 +32,7 @@
 
 .textContainer h2 {
   font-weight: 700;
-
-  font-size: 35px;
+  font-size: 24px;
 }
 .textContainer p {
   width: 95vw;
@@ -45,6 +44,9 @@
 @media (min-width: 640px) {
   .textContainer {
     padding: 0.5rem;
+  }
+  .textContainer h2 {
+    font-size: 35px;
   }
 }
 

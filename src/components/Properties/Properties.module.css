@@ -15,7 +15,7 @@
 }
 
 .card {
-  width: 366px;
+  width: 300px;
   height: 536px;
   background: #ffffff;
   border: 1px solid #dbdbdb;
@@ -56,14 +56,15 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 195.4%;
-  width: 299px;
-  height: 27px;
+  /* width: 299px; */
+  /* height: 27px; */
   color: #6c6c6c;
   margin-bottom: 1rem;
 }
 
 .infoContainer {
-  padding-left: 35px;
+  margin: 10px;
+  padding-left: 0px;
 }
 
 .houseinfo {
@@ -77,8 +78,14 @@
   font-size: 14px;
   line-height: 195.4%;
   color: #6c6c6c;
-  width: 288px;
-  height: 27px;
+  /* width: 288px; */
+  /* height: 27px; */
+}
+
+@media (min-width: 640px) {
+  /* .card {
+    width: 366px;
+  } */
 }
 
 @media (min-width: 740px) {
@@ -86,5 +93,8 @@
     width: 80%;
     margin: 0 auto;
     justify-content: flex-start;
+  }
+  .infoContainer {
+    /* padding-left: 35px; */
   }
 }
