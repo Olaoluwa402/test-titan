@@ -14,7 +14,7 @@ function Hero() {
 
   return (
     <div className={styles.container}>
-      <div className="overflow-hidden">
+      <div className=" w-full">
         <Carousel
           showArrows={true}
           autoPlay={true}
@@ -34,6 +34,7 @@ function Hero() {
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     width: "100%",
+                    overflow: "hidden",
                   }}
                 >
                   <div className={styles.content}>
