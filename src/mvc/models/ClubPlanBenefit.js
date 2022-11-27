@@ -3,7 +3,7 @@ import db from "../database/db.js";
 
 const ClubPlanBenefit = db.define("clubplanbenefits", {
   benefit: {
-    type: DataTypes.STRING,
+    type: DataTypes.TEXT,
     allowNull: false,
   },
   clubPlanId: { type: DataTypes.STRING, allowNull: false },

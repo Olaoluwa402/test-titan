@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       benefit: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
       clubPlanId: { type: Sequelize.INTEGER, allowNull: false },

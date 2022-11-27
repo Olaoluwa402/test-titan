@@ -7,7 +7,7 @@ const Property = db.define(
     video_url: { type: DataTypes.STRING, allowNull: false },
     videoUrlId: { type: DataTypes.STRING, allowNull: true },
     title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false },
     pricing: { type: DataTypes.STRING, allowNull: false },
     location: { type: DataTypes.STRING, allowNull: false },
     no_of_beds: { type: DataTypes.STRING, allowNull: false },

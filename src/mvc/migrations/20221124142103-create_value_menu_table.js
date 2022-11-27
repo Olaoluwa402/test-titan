@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       title: { type: Sequelize.STRING, allowNull: false },
-      desc: { type: Sequelize.STRING, allowNull: false },
+      desc: { type: Sequelize.TEXT, allowNull: false },
       icon: { type: Sequelize.STRING, allowNull: true },
       iconId: { type: Sequelize.STRING, allowNull: true },
       valueId: { type: Sequelize.INTEGER, allowNull: false },

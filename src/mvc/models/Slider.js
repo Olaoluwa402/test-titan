@@ -8,7 +8,7 @@ const Slider = db.define(
     imageId: { type: DataTypes.STRING, allowNull: true },
     url: { type: DataTypes.STRING, allowNull: false },
     title: { type: DataTypes.STRING, allowNull: false },
-    description: { type: DataTypes.STRING, allowNull: false },
+    description: { type: DataTypes.TEXT, allowNull: false },
   },
   {}
 );

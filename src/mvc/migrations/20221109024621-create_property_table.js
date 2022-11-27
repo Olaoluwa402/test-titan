@@ -13,7 +13,7 @@ module.exports = {
       video_url: { type: Sequelize.STRING, allowNull: false },
       videoUrlId: { type: Sequelize.STRING, allowNull: true },
       title: { type: Sequelize.STRING, allowNull: false },
-      description: { type: Sequelize.STRING, allowNull: false },
+      description: { type: Sequelize.TEXT, allowNull: false },
       pricing: { type: Sequelize.STRING, allowNull: false },
       location: { type: Sequelize.STRING, allowNull: false },
       no_of_beds: { type: Sequelize.STRING, allowNull: false },

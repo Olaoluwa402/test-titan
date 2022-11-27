@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       title: { type: Sequelize.STRING, allowNull: false },
-      desc: { type: Sequelize.STRING, allowNull: false },
+      desc: { type: Sequelize.TEXT, allowNull: false },
       image: { type: Sequelize.STRING, allowNull: true },
       imageId: { type: Sequelize.STRING, allowNull: true },
       createdAt: { type: Sequelize.DATE },

@@ -11,7 +11,7 @@ module.exports = {
         primaryKey: true,
       },
       title: { type: Sequelize.STRING, allowNull: false },
-      detail: { type: Sequelize.STRING, allowNull: false },
+      detail: { type: Sequelize.TEXT, allowNull: false },
       createdAt: { type: Sequelize.DATE },
       updatedAt: { type: Sequelize.DATE },
     });

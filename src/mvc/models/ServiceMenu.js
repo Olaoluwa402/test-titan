@@ -5,7 +5,7 @@ const ServiceMenu = db.define(
   "servicemenus",
   {
     title: { type: DataTypes.STRING, allowNull: false },
-    desc: { type: DataTypes.STRING, allowNull: false },
+    desc: { type: DataTypes.TEXT, allowNull: false },
     icon: { type: DataTypes.STRING, allowNull: true },
     iconId: { type: DataTypes.STRING, allowNull: true },
   },
