@@ -23,12 +23,16 @@ function PropertiesScreen() {
 
   return (
     <>
-      {loadingHome ||
-        (loading && (
-          <Modal>
-            <Lottie animationData={congratulation} loop={true} />
-          </Modal>
-        ))}
+      {loadingHome && (
+        <Modal>
+          <Lottie animationData={congratulation} loop={true} />
+        </Modal>
+      )}
+      {loading && (
+        <Modal>
+          <Lottie animationData={congratulation} loop={true} />
+        </Modal>
+      )}
       {homeRecord && (
         <Layout> {data && <Properties properties={data.properties} />}</Layout>
       )}
