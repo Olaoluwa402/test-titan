@@ -7,7 +7,7 @@ module.exports = {
     await queryInterface.bulkInsert("clubplans", sampleData.clubPlans, {});
 
     const clubPlan = await queryInterface.sequelize.query(
-      `SELECT id from CLUBPLANS;`
+      `SELECT id from clubplans;`
     );
 
     const clubPlanRows = clubPlan[0];

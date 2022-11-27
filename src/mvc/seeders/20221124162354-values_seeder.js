@@ -7,7 +7,7 @@ module.exports = {
     await queryInterface.bulkInsert("valuezes", sampleData.values, {});
 
     const value = await queryInterface.sequelize.query(
-      `SELECT id from VALUEZES;`
+      `SELECT id from valuezes;`
     );
 
     // values

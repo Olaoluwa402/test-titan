@@ -6,7 +6,7 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.bulkInsert("users", sampleData.users, {});
 
-    const users = await queryInterface.sequelize.query(`SELECT id from USERS`);
+    const users = await queryInterface.sequelize.query(`SELECT id from users;`);
 
     // properties
     const userRows = users[0];
@@ -17,7 +17,7 @@ module.exports = {
 
     //property_plans
     const prop = await queryInterface.sequelize.query(
-      `SELECT id from PROPERTIES;`
+      `SELECT id from properties;`
     );
 
     const propertyRows = prop[0];
