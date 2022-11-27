@@ -4,7 +4,7 @@ import db from "../database/db.js";
 import bcrypt from "bcryptjs";
 
 const User = db.define(
-  "Users",
+  "users",
   {
     email: {
       validate: { isEmail: true },

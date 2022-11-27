@@ -2,7 +2,7 @@ import { Sequelize, DataTypes, UUIDV4 } from "sequelize";
 import db from "../database/db.js";
 
 const Property = db.define(
-  "Properties",
+  "properties",
   {
     video_url: { type: DataTypes.STRING, allowNull: false },
     videoUrlId: { type: DataTypes.STRING, allowNull: true },

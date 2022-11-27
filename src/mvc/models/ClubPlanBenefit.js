@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import db from "../database/db.js";
 
-const ClubPlanBenefit = db.define("ClubPlanBenefits", {
+const ClubPlanBenefit = db.define("clubplanbenefits", {
   benefit: {
     type: DataTypes.STRING,
     allowNull: false,

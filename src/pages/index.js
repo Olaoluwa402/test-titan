@@ -44,7 +44,7 @@ const Home = () => {
         </Layout>
       ) : (
         <div className="min-w-screen min-h-screen bg-dark flex justify-center items-center">
-          <h2 className="text-white">Loading...</h2>
+          <h2 className="text-white">No Record Yet...</h2>
         </div>
       )}
     </>

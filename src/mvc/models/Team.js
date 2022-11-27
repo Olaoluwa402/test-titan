@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../database/db.js";
 
 const Team = db.define(
-  "Teams",
+  "teams",
   {
     image: { type: DataTypes.STRING, allowNull: false },
     imageId: { type: DataTypes.STRING, allowNull: true },
