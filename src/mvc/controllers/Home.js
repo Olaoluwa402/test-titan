@@ -1,6 +1,11 @@
 import db from "../database/db.js";
-import { Team } from "../models/central.js";
+// Test DB
+db.authenticate()
+  .then(() => console.log("Database connected... HOME"))
+  .catch((err) => console.log("database error Error HOME: " + err));
+
 import { Setting } from "../models/central.js";
+import { Team } from "../models/central.js";
 import { Property } from "../models/central.js";
 import { Slider } from "../models/central.js";
 import { Service } from "../models/central.js";
