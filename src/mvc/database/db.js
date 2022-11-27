@@ -16,4 +16,9 @@ const db = new Sequelize(
   }
 );
 
+// Test DB
+db.authenticate()
+  .then(() => console.log("Database connected..."))
+  .catch((err) => console.log("database error Error: " + err));
+
 export default db;
