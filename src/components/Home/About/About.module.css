@@ -1,0 +1,261 @@
+.generalContainer {
+  margin-bottom: 10rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+  width: 80%;
+}
+
+.aboutTittle {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 45px;
+  line-height: 61px;
+  color: #141d32;
+  width: 206px;
+  height: 61px;
+  margin-bottom: 10px;
+}
+
+.aboutText {
+  text-align: justify;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.8;
+  font-size: 16px;
+  color: #6c6c6c;
+  padding: 0 1rem;
+  height: auto;
+  margin-top: 10px;
+}
+
+/*Vision styling*/
+.vision {
+  width: 100%;
+  height: auto;
+  background: rgb(255, 122, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 122, 0, 1) 20%,
+    rgba(238, 241, 248, 1) 20%
+  );
+  margin: 20px 0;
+}
+
+.vision_Inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.vision__Title {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 61px;
+  color: #141d32;
+}
+
+.vision__Text {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  text-transform: capitalize;
+  color: #6c6c6c;
+}
+
+.visionAbsoluteContainer {
+  position: relative;
+}
+
+.imageContainer {
+  position: absolute;
+  top: 12%;
+  left: 10%;
+}
+
+/*values*/
+.valuesContainer {
+  background-color: #ffffff;
+  margin: 20px auto;
+  width: 93%;
+}
+
+.valueTitle {
+  width: 212px;
+  height: 61px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 61px;
+  color: #141d32;
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.valueText {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  text-transform: capitalize;
+  color: #6c6c6c;
+  height: 60px;
+  margin-top: 2rem;
+  text-align: justify;
+}
+
+.valueBorder {
+  margin: 1rem 0;
+}
+
+.valueTop {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cardContainer {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 360px;
+  height: 283px;
+  background: #f2f6ff;
+  border-radius: 16px;
+  position: relative;
+  margin-bottom: 2rem;
+}
+
+.vectorContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  width: 73px;
+  height: 73px;
+  background: #ffffff;
+  border: 1px solid var(--titaniumOrange);
+  color: white;
+  position: absolute;
+  top: -12%;
+  right: 5%;
+}
+
+.cardTitle {
+  height: 43px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 22px;
+  line-height: 42px;
+  color: #141d32;
+  padding-top: 4rem;
+  padding-left: 15px;
+  margin-bottom: 25px;
+}
+
+.cardText {
+  height: 60px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  color: #6c6c6c;
+  padding-top: 1rem;
+  padding-left: 15px;
+  padding-top: 25px;
+}
+
+/*service styling*/
+.service {
+  width: 100%;
+  height: auto;
+  background: rgb(238, 241, 248);
+  background: linear-gradient(
+    90deg,
+    rgba(238, 241, 248, 1) 80%,
+    rgba(255, 122, 0, 1) 80%
+  );
+  margin: 20px 0;
+}
+
+.service_Inner {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.service__Title {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 40px;
+  line-height: 61px;
+  color: #141d32;
+}
+
+.service__Text {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  text-transform: capitalize;
+  color: #6c6c6c;
+}
+
+@media (min-width: 640px) {
+}
+
+@media (min-width: 768px) {
+  :is(.vision_Inner, .service_Inner) {
+    width: 80%;
+    margin: 0 auto;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (min-width: 920px) {
+  .aboutText {
+    text-align: center;
+    max-width: 980px;
+  }
+}
+
+/* 'laptop': '1024px' */
+@media (min-width: 1024px) {
+}
+
+/* 'desktop': '1280px', */
+@media (min-width: 1280px) {
+}
+
+@media (min-width: 1536px) {
+}

@@ -1,0 +1,71 @@
+.container {
+  background: #ffffff;
+  border-radius: 30px;
+  width: 90%;
+  margin: 0 auto;
+  height: 125px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  margin-top: 30px;
+}
+
+.container select {
+  height: 30px;
+  max-width: 220px;
+  padding: 5px;
+  background-color: #ffffff;
+}
+
+.label {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 18px;
+  color: #716767;
+  width: 105px;
+  height: 18px;
+}
+
+.locationWrapper,
+.bedroomWrapper,
+.priceWrapper,
+.propertyWrapper {
+  display: flex;
+  justify-content: space-between;
+  border: none;
+}
+
+.searchContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 34px 0px 28px;
+  gap: 8px;
+  width: 136px;
+  height: 48px;
+  background: #ff7a00;
+  border-radius: 30px;
+}
+
+.searchIcon {
+  color: #ffffff;
+}
+
+.searchText {
+  width: 50px;
+  height: 15px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 15px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  text-transform: uppercase;
+  color: #ffffff;
+}

@@ -1,0 +1,73 @@
+.container {
+  height: 100%;
+}
+
+.containerInner {
+  height: 60vh;
+  color: #ffffff;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.error {
+  color: #fc8181;
+}
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+.textContainer {
+  z-index: 2;
+  text-align: center;
+  padding: 2rem;
+}
+
+.textContainer h2 {
+  font-weight: 700;
+
+  font-size: 35px;
+}
+.textContainer p {
+  width: 95vw;
+  margin-top: 15px;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+@media (min-width: 640px) {
+  .textContainer {
+    padding: 0.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .textContainer p {
+    width: 50vw;
+  }
+}
+
+/* 'laptop': '1024px' */
+@media (min-width: 1024px) {
+  .textContainer h2 {
+    font-size: 45px;
+  }
+
+  .textContainer p {
+    font-size: 16px;
+  }
+}
+
+/* 'desktop': '1280px', */
+@media (min-width: 1280px) {
+}
+
+@media (min-width: 1536px) {
+}

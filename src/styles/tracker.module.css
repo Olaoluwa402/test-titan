@@ -1,0 +1,11 @@
+.trackerGroup{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.tracker{
+    background-color: white;
+    padding: 1rem;
+    border: 1px solid silver;
+    border-radius: 20px;
+}

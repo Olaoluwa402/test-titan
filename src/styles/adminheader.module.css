@@ -1,0 +1,54 @@
+.adminheader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+
+}
+.adminheader > div > * {
+    margin-right: 15px;
+}
+.adminheader > div > * > *{
+    margin-right: 15px;
+}
+.left{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn{
+    background-color: rgba(192, 192, 192, 0.342);
+    padding: 10px;
+    color: rgb(49, 49, 49);
+}
+.right{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.admin{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.admin:hover{
+    background-color: rgba(192, 192, 192, 0.342);
+
+}
+.search{
+    position: relative;
+}
+.search input{
+    border: 1px solid  silver;
+    padding: 7px 10px;
+    padding-left: 30px;
+    outline: none;
+}
+
+.searchIcon{
+    position: absolute;
+    top: 13px;
+    left: 10px;
+}

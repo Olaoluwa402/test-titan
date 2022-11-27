@@ -1,0 +1,148 @@
+.container{
+    width: 100%;
+    height: 384px;
+    background-color: var(--titaniumDarkBlue200);
+
+}
+
+.footerContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.7;
+  font-size: 14px;
+}
+
+.footerMenu{
+  display: flex;
+}
+
+.footerMenu__left{
+  flex:1;
+}
+
+.footerMenu_leftSocial ul{ 
+  display:flex;
+  align-items: center;
+}
+
+.footerMenu__leftText{
+  margin: 10px 0;
+  color: var(--light);
+}
+
+.footerMenuSocial > li {
+  margin-right: 4px;
+  width: 26px; 
+  height: 26px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--titaniumOrange);
+}
+
+.topIcons{
+   color: var(--light);
+}
+
+.faFaceBook, .faLinkedin{
+   font-size: 10px;
+}
+ 
+.aiFillTwitter, .aiFillInstagram{
+   font-size: 10px;
+}
+
+.footerMenu__right{
+  margin-left: 50px;
+  flex:2;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footerMenu__rightTitle{ 
+ text-transform: capitalize;
+ font-weight: bold;
+}
+
+
+.footerMenu__rightItems{
+  color: var(--light);
+}
+
+
+.footerMenu__rightItems ul{
+  margin: 20px 0;
+  line-height: 1.8;
+} 
+
+.footerMenu__rightItems ul li a{
+  text-transform:capitalize;
+}
+
+.contactTitle{
+  text-transform: capitalize; 
+}
+
+.iconContainer{
+  width: 44px;
+  height: 44px;
+  background-color: rgba(255, 255, 255, 0.17);
+  border-radius: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 10px;
+}
+
+.footerMenu__rightContactDetail > li  {
+  display: flex;
+  align-items: flex-start;
+}
+
+.footerBottom p{
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+
+@media (max-width:1020px){
+  .container{
+    height: auto;
+    padding: 1rem 0.5rem;
+}
+
+.footerMenu__left{
+  /* flex-direction: column; */
+  flex: 1;
+}
+.footerMenu__right{
+  margin-top: 20px;
+  margin-left: 0;
+}
+}
+
+
+@media (max-width:948px){
+  .footerMenu{
+    flex-direction: column;
+  }
+}
+
+@media (max-width:500px){
+
+   .footerBottom{
+    margin-top: 1.5rem;
+   }
+
+   .footerMenu__right{
+    flex-direction: column;
+    margin-top: 30px;
+  }
+
+}

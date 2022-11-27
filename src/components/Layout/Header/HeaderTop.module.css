@@ -1,0 +1,92 @@
+.container{
+    width:100%;
+    height: 48px;
+    background-color: var(--titaniumOrange);
+}
+
+.topBar{
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topBarSocial, .topBarContact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topBarSocial > li, .topBarContact >li {
+   margin-right: 20px;
+}
+
+.topIcons{
+    color: var(--light);
+}
+
+.faFaceBook, .faLinkedin{
+    font-size: 13px;
+}
+
+.aiFillTwitter, .aiFillInstagram{
+    font-size: 15px;
+}
+
+.faPhone, .faEnvelop{
+    font-size: 13px; 
+}
+
+.topBarContact__items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+} 
+
+.topBarContact__items:first-child{
+    text-decoration: underline;
+    text-decoration-color: var(--light);
+    cursor: pointer;
+}
+
+.topBarContact__items > span{
+    margin-left: 8px; 
+    color: var(--light);
+    font-size: 12px;
+    text-transform: lowercase;
+}
+
+.container > .topBar > .topBarContact > li > .topIcons {
+    font-size: 12px;
+}
+
+@media (max-width:500px){
+
+    /* top bar */
+
+    .topBarSocial > li, .topBarContact >li {
+        margin-right: 5px;
+     }
+
+     .faFaceBook, .faLinkedin{
+        font-size: 10px;
+    }
+    
+    .aiFillTwitter, .aiFillInstagram{
+        font-size: 12px;
+    }
+    
+    .faPhone, .faEnvelop{
+        font-size: 10px;  
+    } 
+
+    .container > .topBar > .topBarContact > li > .topIcons {
+        font-size: 10px;
+    }
+
+    .topBarContact__items > span{
+        margin-left: 5px; 
+        font-size: 8.5px;
+    }
+    
+}
