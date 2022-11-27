@@ -9,7 +9,7 @@ import ErrorHandler from "../utils/errorHandler.js";
 // @access Private - admin
 
 const createImage = catchAsyncErrors(async (req, res, next) => {
-  const { image, propertyId } = req.body;
+  const { images, propertyId } = req.body;
 
   const rgx = /^httpohjhj/gi;
 

@@ -29,7 +29,7 @@ const Home = () => {
         <Modal>
           <Lottie animationData={congratulation} loop={true} />
         </Modal>
-      ) : data ? (
+      ) : data && data.settings.length > 0 ? (
         <Layout>
           <Head>
             <title>Titanium</title>

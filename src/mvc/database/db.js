@@ -13,6 +13,9 @@ const db = new Sequelize(
       process.env
         .SEQUELIZE_DIALECT /* one of 'mysql' | 'postgres' | 'sqlite' | 'mariadb' | 'mssql' | 'db2' | 'snowflake' | 'oracle' */,
     logging: true,
+    define: {
+      freezeTableName: true,
+    },
   }
 );
 

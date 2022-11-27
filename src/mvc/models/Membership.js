@@ -2,7 +2,7 @@ import { Sequelize, DataTypes } from "sequelize";
 import db from "../database/db.js";
 
 const Membership = db.define(
-  "Membership",
+  "Memberships",
   {
     firstname: { type: DataTypes.STRING, allowNull: true },
     lastname: { type: DataTypes.STRING, allowNull: true },

@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../database/db.js";
 
 const PropertyFeature = db.define(
-  "PropertyFeature",
+  "PropertyFeatures",
   {
     icon: { type: DataTypes.STRING, allowNull: false },
     iconId: { type: DataTypes.STRING, allowNull: true },

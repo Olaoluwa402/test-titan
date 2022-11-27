@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../database/db.js";
 
 const Service = db.define(
-  "Service",
+  "Services",
   {
     title: { type: DataTypes.STRING, allowNull: false },
     desc: { type: DataTypes.STRING, allowNull: false },

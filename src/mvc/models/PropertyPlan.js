@@ -2,7 +2,7 @@ import { DataTypes } from "sequelize";
 import db from "../database/db.js";
 
 const PropertyPlan = db.define(
-  "PropertyPlan",
+  "PropertyPlans",
   {
     title: { type: DataTypes.STRING, allowNull: false },
     image: { type: DataTypes.STRING, allowNull: false },
