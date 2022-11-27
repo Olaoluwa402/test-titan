@@ -21,7 +21,8 @@
 .content {
   text-align: center;
   z-index: 10;
-  width: 30%;
+  width: 90%;
+  margin: 0 auto;
   /* max-width: 980px; */
   display: flex;
   flex-direction: column;
@@ -63,7 +64,7 @@
 
 @media (min-width: 640px) {
   .content {
-    width: 50%;
+    width: 60%;
   }
 }
 

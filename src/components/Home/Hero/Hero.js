@@ -34,7 +34,6 @@ function Hero() {
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     width: "100%",
-                    overflow: "hidden",
                   }}
                 >
                   <div className={styles.content}>
