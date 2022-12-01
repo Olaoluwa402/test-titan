@@ -5,6 +5,16 @@ import Link from "next/link";
 import Title from "../Home/Title/Title";
 
 function Properties({ properties }) {
+  const settings = {
+    arrows: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    vertical: false,
+  };
   return (
     <div className={styles.container}>
       <Title>Our Properties</Title>
@@ -15,7 +25,7 @@ function Properties({ properties }) {
               <Link href={`/properties/[id]`} as={`/properties/${property.id}`}>
                 <a>
                   <Image
-                    src={property.images[0].url}
+                    src={`/${property.image}`}
                     alt="property"
                     width={370}
                     height={294}
@@ -37,8 +47,16 @@ function Properties({ properties }) {
 
                 <h2 className={styles.amount}>{property.pricing}</h2>
                 <p className={styles.cardText}>{property.location}</p>
-
-                <div className={styles.extrainfo}>{property.extra_info}</div>
+                <hr />
+                <div className={styles.extrainfo}>
+                  <span>
+                    {property.area}m<sup>2</sup>
+                  </span>
+                  {" . "}
+                  <span>{property.no_of_beds}beds</span> {" . "}
+                  <span>{property.no_of_baths}baths</span> {" . "}
+                  <span>{property.parking_space}parking space</span>
+                </div>
               </div>
             </div>
           ))

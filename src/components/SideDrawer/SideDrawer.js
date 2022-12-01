@@ -30,7 +30,14 @@ const SideDrawer = ({ show, setSideDrawerOpen }) => {
             menuItems.map((item) => (
               <li key={item.id} className="dropdown">
                 <div className="dropdownContainer">
-                  <BsInfoSquareFill className="dropdownIcon" />
+                  <div className="w-[40px] h-[40px] bg-white flex justify-center items-center rounded-full overflow-hidden mr-3">
+                    <Image
+                      src={`/${item.icon}`}
+                      alt={item.name}
+                      width={20}
+                      height={20}
+                    />
+                  </div>
                   <Link href={item.url}>
                     <a
                       className="dropdown_Link"

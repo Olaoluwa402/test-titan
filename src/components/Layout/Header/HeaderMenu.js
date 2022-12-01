@@ -24,13 +24,18 @@ const HeaderMenu = ({ drawerToggleClickHandler, SideDrawerOpen }) => {
         <NavBar menuItems={menuItems ? menuItems.slice(0, 6) : []} />
 
         <div className={styles.spacer}></div>
-        <div className={styles.navBarMenu__cta}>
-          <span>
-            {settings && settings.length > 0 && settings[0].getQuoteCTA
-              ? settings[0].getQuoteCTA
-              : ""}
-          </span>
-        </div>
+        <Link href="/quote">
+          <a>
+            <div className={styles.navBarMenu__cta}>
+              <span>
+                {settings && settings.length > 0 && settings[0].getQuoteCTA
+                  ? settings[0].getQuoteCTA
+                  : ""}
+              </span>
+            </div>
+          </a>
+        </Link>
+
         <DrawerToggleButton
           click={drawerToggleClickHandler}
           SideDrawerOpen={SideDrawerOpen}

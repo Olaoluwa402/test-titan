@@ -16,7 +16,12 @@ const Team = ({ teams }) => {
               className="max-w-[450px] max-h-fit flex flex-col items-center my-6 mr-0 md:mr-3"
             >
               <div className="w-[300px] h-[300px] rounded-full overflow-hidden">
-                <Image src={item.image} alt="team" width={300} height={300} />
+                <Image
+                  src={`/${item.image}`}
+                  alt="team"
+                  width={300}
+                  height={300}
+                />
               </div>
               <h3 className="my-3 text-dark font-Jakarta font-bold text-[24px]">
                 {item.name}

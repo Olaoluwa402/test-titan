@@ -6,7 +6,7 @@ import About from "../components/Home/About/About";
 import { useDispatch, useSelector } from "react-redux";
 import { wrapper } from "../redux/store";
 import { getHomeDataAction } from "../redux/actions/generalActions";
-import Properties from "../components/Properties/Properties";
+import Properties from "../components/Properties/PropertySlider";
 import Team from "../components/Home/Team/Team";
 import { useEffect } from "react";
 import Modal from "../components/Modals/CustomModal/CustomModal";
@@ -29,7 +29,7 @@ const Home = () => {
         <Modal>
           <Lottie animationData={congratulation} loop={true} />
         </Modal>
-      ) : data && data.settings.length > 0 ? (
+      ) : data && data.settings && data.settings.length > 0 ? (
         <Layout>
           <Head>
             <title>Titanium</title>

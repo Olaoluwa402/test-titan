@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import Image from "next/image";
-// import Link from "next/link";
+import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import Layout from "../Layout/Layout";
 import Modal from "../../components/Modals/CustomModal/CustomModal";
@@ -11,7 +11,9 @@ import { getPropertyDetailAction } from "../../redux/actions/propertiesActions";
 import { getHomeDataAction } from "../../redux/actions/generalActions";
 import styles from "./SingleProperty.module.css";
 import Title from "../Home/Title/Title";
-import floorBg from "../../asset/images/floorplan-bg.png";
+import floorBg from "../../asset/images/naira.png";
+import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import "react-tabs/style/react-tabs.css";
 
 const style = {
   width: "100%",
@@ -41,6 +43,26 @@ const SingleProperty = () => {
     dispatch(getHomeDataAction());
     dispatch(getPropertyDetailAction({ id }));
   }, [dispatch, id]);
+
+  const typicalFloor =
+    property &&
+    property.property.facilities &&
+    property.property.facilities.length > 0 &&
+    property.property.facilities.filter((item) => item.onTypicalFloor == true);
+
+  const maissonete =
+    property &&
+    property.property.facilities &&
+    property.property.facilities.length > 0 &&
+    property.property.facilities.filter((item) => item.onMaissonete == true);
+  const normalFloor =
+    property &&
+    property.property.facilities &&
+    property.property.facilities.length > 0 &&
+    property.property.facilities.filter(
+      (item) => item.onMaissonete !== true && item.onTypicalFloor !== true
+    );
+
   return (
     <>
       {loadingHome ? (
@@ -55,20 +77,35 @@ const SingleProperty = () => {
               <div className="w-full md:w-4/5 mx-auto h-screen bg-slate-600 relative">
                 <div className="bg-dark opacity-50 absolute top-0 left-0 bottom-0 right-0 z-2"></div>
                 <p className="absolute z-10 top-0 left-0 text-white uppercase text-[20px] font-bold m-6 font-Jakarta">
-                  {property && property.property.title}
+                  {property && property.property.sub_title}
                 </p>
-                <video
-                  className={styles.video}
-                  width="100%"
-                  height="450"
-                  controls
-                >
-                  <source
-                    src={property && property.property.video_url}
-                    type="video/mp4"
-                  />
-                  Your browser does not support the video tag.
-                </video>
+                {property && property.property.video_url ? (
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src={`https://www.youtube.com/embed/${property.property.video_url}?controls=1&autoplay=1&mute=1`}
+                  ></iframe>
+                ) : (
+                  // <video className={styles.video} controls>
+                  //   <source
+                  //     src={property && property.property.video_url}
+                  //     type="video/mp4"
+                  //   />
+                  //   Your browser does not support the video tag.
+                  // </video>
+                  <div className="w-full h-full">
+                    <Image
+                      layout="fill"
+                      objectFit="cover"
+                      alt={property && property.property.title}
+                      src={
+                        property && property.property.image
+                          ? `/${property.property.image}`
+                          : ""
+                      }
+                    />
+                  </div>
+                )}
               </div>
             </div>
 
@@ -89,7 +126,7 @@ const SingleProperty = () => {
                   property.property.images.map((image) => (
                     <div key={image.id} className="basis-2/6 mr-3 py-3">
                       <Image
-                        src={image.url}
+                        src={`/${image.url}`}
                         alt="single property"
                         width={385}
                         height={258}
@@ -100,69 +137,222 @@ const SingleProperty = () => {
             </div>
             {/* end of images */}
 
-            {/* facilities */}
-            <div className="w-full md:w-4/5 mx-auto">
-              <Title>House Facilities</Title>
+            {/* facilities*/}
+            {normalFloor && normalFloor.length > 0 && (
+              <div className="w-full md:w-4/5 mx-auto">
+                <Title>House Facilities </Title>
 
-              <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
-                {property &&
-                  property.property.facilities &&
-                  property.property.facilities.length > 0 &&
-                  property.property.facilities.map((facility) => (
+                <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
+                  {normalFloor.map((facility) => (
                     <div
                       key={facility.id}
                       className="w-[290px] h-[150px] flex flex-col md:flex-row  items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
                     >
+                      {" "}
                       <div className="sm:w-[64px] mr-3">
-                        <div className=" flex items-center justify-center w-[64px] h-[64px] mr-3 rounded-full  bg-titaniumOrange200">
+                        <div className=" flex items-center justify-center w-[50px] h-[50px] mr-3 rounded-full  bg-titaniumOrange200">
                           <Image
-                            src={facility.icon}
+                            src={`/${facility.icon}`}
                             alt="facility"
                             width={20}
                             height={20}
                           />
                         </div>
                       </div>
-
                       <div className="basis-full sm:basis-full flex justify-center sm:justify-start items-center">
                         {" "}
                         <p className="">{facility.title}</p>
                       </div>
                     </div>
                   ))}
+                </div>
               </div>
-            </div>
+            )}
+
+            {/* facilities on Maissonete*/}
+            {maissonete && maissonete.length > 0 && (
+              <div className="w-full md:w-4/5 mx-auto">
+                <Title>House Facilities on Maissonete</Title>
+
+                <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
+                  {maissonete.map((facility) => (
+                    <div
+                      key={facility.id}
+                      className="w-[290px] h-[150px] flex flex-col md:flex-row  items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
+                    >
+                      {" "}
+                      <div className="sm:w-[64px] mr-3">
+                        <div className=" flex items-center justify-center w-[50px] h-[50px] mr-3 rounded-full  bg-titaniumOrange200">
+                          <Image
+                            src={`/${facility.icon}`}
+                            alt="facility"
+                            width={20}
+                            height={20}
+                          />
+                        </div>
+                      </div>
+                      <div className="basis-full sm:basis-full flex justify-center sm:justify-start items-center">
+                        {" "}
+                        <p className="">{facility.title}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* end of faclities */}
+
+            {/* facilities on Typical Floor */}
+            {typicalFloor && typicalFloor.length > 0 && (
+              <div className="w-full md:w-4/5 mx-auto">
+                <Title>House Facilities on Typical Floor</Title>
+
+                <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
+                  {typicalFloor.map((facility) => (
+                    <div
+                      key={facility.id}
+                      className="w-[290px] h-[150px] flex flex-col md:flex-row  items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
+                    >
+                      {" "}
+                      <div className="sm:w-[64px] mr-3">
+                        <div className=" flex items-center justify-center w-[50px] h-[50px] mr-3 rounded-full  bg-titaniumOrange200">
+                          <Image
+                            src={`/${facility.icon}`}
+                            alt="facility"
+                            width={20}
+                            height={20}
+                          />
+                        </div>
+                      </div>
+                      <div className="basis-full sm:basis-full flex justify-center sm:justify-start items-center">
+                        {" "}
+                        <p className="">{facility.title}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* property features */}
+            {property &&
+              property.property.propertyFeatures &&
+              property.property.propertyFeatures.length > 0 && (
+                <div className="w-full md:w-4/5 mx-auto">
+                  <Title>House Features</Title>
+
+                  <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
+                    {property.property.propertyFeatures.map((feature) => (
+                      <div
+                        key={feature.id}
+                        className="w-[290px] h-[200px] flex flex-col    items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
+                      >
+                        {" "}
+                        <div className="sm:w-[64px] mr-3">
+                          <div className=" flex items-center justify-center w-[50px] h-[50px] mr-3 rounded-full  bg-titaniumOrange200">
+                            <Image
+                              src={`/${feature.icon}`}
+                              alt="feature"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                        </div>
+                        <div className="basis-full sm:basis-full flex justify-center items-center">
+                          {" "}
+                          <p className="">{feature.title}</p>
+                        </div>
+                        <div className="basis-full sm:basis-full flex justify-center items-center">
+                          {" "}
+                          <p className="text-dark50 text-[14px]">
+                            {feature.description}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+            {/* property features */}
+            {property &&
+              property.property.propertyAdvantages &&
+              property.property.propertyAdvantages.length > 0 && (
+                <div className="w-full md:w-4/5 mx-auto">
+                  <Title>Property Added Advatages</Title>
+
+                  <div className="flex flex-col md:flex-row items-center  flex-wrap my-3">
+                    {property.property.propertyAdvantages.map((feature) => (
+                      <div
+                        key={feature.id}
+                        className="w-[290px] h-[150px] flex flex-col   items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
+                      >
+                        {" "}
+                        <div className="sm:w-[64px] mr-3">
+                          <div className=" flex items-center justify-center w-[50px] h-[50px] mr-3 rounded-full  bg-titaniumOrange200">
+                            <Image
+                              src={`/${feature.icon}`}
+                              alt="feature"
+                              width={20}
+                              height={20}
+                            />
+                          </div>
+                        </div>
+                        <div className="basis-full sm:basis-full flex justify-center sm:justify-start items-center">
+                          {" "}
+                          <p className="">{feature.title.toUpperCase()}</p>
+                        </div>
+                        <div className="basis-full sm:basis-full flex flex-col justify-center sm:justify-start items-center">
+                          {" "}
+                          <p className="">{feature.description}</p>
+                          <hr className="my-0 w-[80px] h-[2px] bg-titaniumOrange border-0 dark:bg-gray-700" />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
             {/* end of faclities */}
 
             {/* property plan pricing */}
             <div className="w-full h-full md:w-4/5 mx-auto my-12">
-              <h2 className="font-Jakarta text-[25px] max-w-[650px] mx-auto  md:text-[30px] text-dark text-center font-bold my-6 px-6">
-                {property && property.property.title} Floor Plan & Pricing
+              <h2 className="font-Jakarta text-[25px] max-w-[980px] mx-auto  md:text-[30px] text-dark text-center font-bold my-6 px-6">
+                {property && property.property.sub_title} Floor Plan & Pricing
               </h2>
 
               <div className="w-full h-full flex flex-col lg:flex-row my-12 ">
-                <div className="basis-3/5 max-h-[520px]">
-                  <div className="w-full flex items-center p-3 flex-wrap  border-b-3 border-b-light200">
-                    <div className="w-[180px] h-[47px] bg-light mr-0 mb-3 md:mr-6 py-2 px-3 cursor-pointer hover:bg-titaniumOrange border-b-4 border-b-titaniumOrange">
-                      First Floor Plan
-                    </div>
-                    <div className="w-[180px] h-[47px] bg-light100 mr-0 mb-3 md:mr-6 py-2 px-3 cursor-pointer hover:bg-titaniumOrange">
-                      Second Floor Plan
-                    </div>
-                    <div className="w-[180px] h-[47px] bg-light100 mr-0 mb-3 md:mr-6 py-2 px-3 cursor-pointer hover:bg-titaniumOrange">
-                      Ground Floor Plan
-                    </div>
-                  </div>
-
-                  <div className="" sty={{ width: "100%", height: "100%" }}>
-                    <Image
-                      src={property && property.property.propertyPlans[0].image}
-                      alt="floorplan"
-                      width={400}
-                      height={400}
-                      objectFit="contain"
-                    />
-                  </div>
+                <div className="basis-3/5 max-h-[520px] mr-12">
+                  <Tabs>
+                    <TabList className="border-b-2 border-b-slate-300">
+                      {property &&
+                        property.property.propertyPlans &&
+                        property.property.propertyPlans.length > 0 &&
+                        property.property.propertyPlans.map((item, i) => (
+                          <Tab key={item.id}>{item.title}</Tab>
+                        ))}
+                    </TabList>
+                    {property &&
+                      property.property.propertyPlans &&
+                      property.property.propertyPlans.length > 0 &&
+                      property.property.propertyPlans.map((item, i) => (
+                        <TabPanel key={item.id}>
+                          <div
+                            className=""
+                            sty={{ width: "100%", height: "100%" }}
+                          >
+                            <Image
+                              src={`/${item.image}`}
+                              alt="floorplan"
+                              width={600}
+                              height={400}
+                              objectFit="contain"
+                            />
+                          </div>
+                        </TabPanel>
+                      ))}
+                  </Tabs>
                 </div>
                 <div className=" basis-2/5 min-h-[520px] bg-slate-100">
                   <div className="p-12 h-[480px] flex flex-col justify-between">
@@ -171,7 +361,7 @@ const SingleProperty = () => {
                         {property && property.property.location}
                       </h3>
                       <p className="text-dark text-[40px] font-Jakarta font-bold">
-                        {property && property.property.pricing}
+                        ₦{property && property.property.pricing}
                       </p>
                       <p className="font-Jakarta" style={{ color: "#9FA4AE" }}>
                         Outright Purchase

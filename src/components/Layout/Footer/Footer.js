@@ -13,8 +13,8 @@ import { ImLocation2 } from "react-icons/im";
 import styles from "./Footer.module.css";
 
 const Footer = () => {
-  const store = useSelector((store) => store.homeData.data);
-  const { settings, menuItems, properties } = store;
+  const store = useSelector((store) => store.homeData);
+  const { data } = store;
 
   const company =
     new Date().getFullYear() > 2021 &&
@@ -39,7 +39,9 @@ const Footer = () => {
             </Link>
 
             <p className={styles.footerMenu__leftText}>
-              {settings[0].aboutUsText}
+              {data && data.about && data.about[0].desc
+                ? data.about[0].desc
+                : ""}
             </p>
             <div className={styles.footerMenu_leftSocial}>
               <ul className={styles.footerMenuSocial}>
@@ -89,8 +91,9 @@ const Footer = () => {
                 className={styles.footerMenu__rightLinks}
                 style={{ color: "rgba(255, 255, 255, 0.8)" }}
               >
-                {menuItems &&
-                  menuItems.map((item) => (
+                {data &&
+                  data.menuItems &&
+                  data.menuItems.map((item) => (
                     <li key={item.id}>
                       <Link href={item.url}>
                         <a>{item.name}</a>
@@ -105,14 +108,15 @@ const Footer = () => {
                 className={styles.footerMenu__rightLinks}
                 style={{ color: "rgba(255, 255, 255, 0.8)" }}
               >
-                {properties &&
-                  properties.map((item) => (
+                {data &&
+                  data.properties &&
+                  data.properties.map((item) => (
                     <li key={item.id}>
                       <Link
                         href={`/properties/[id]`}
                         as={`/properties/${item.id}`}
                       >
-                        <a>{item.title}</a>
+                        <a>{item.sub_title}</a>
                       </Link>
                     </li>
                   ))}
@@ -127,7 +131,11 @@ const Footer = () => {
                   </div>
                   <div className="">
                     <p className={styles.contactTitle}>Tel</p>
-                    <p className="contactText">{settings[0].phone}</p>
+                    <p className="contactText">
+                      {data && data.settings && data.settings[0].phone
+                        ? data.settings[0].phone
+                        : ""}
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -136,7 +144,11 @@ const Footer = () => {
                   </div>
                   <div className="">
                     <p className={styles.contactTitle}>Mail</p>
-                    <p className="contactText">{settings[0].email}</p>
+                    <p className="contactText">
+                      {data && data.settings && data.settings[0].email
+                        ? data.settings[0].email
+                        : ""}
+                    </p>
                   </div>
                 </li>
                 <li>
@@ -146,7 +158,11 @@ const Footer = () => {
 
                   <div className="">
                     <p className={styles.contactTitle}>Address</p>
-                    <p className="contactText">{settings[0].company_address}</p>
+                    <p className="contactText">
+                      {data && data.settings && data.settings[0].company_address
+                        ? data.settings[0].company_address
+                        : ""}
+                    </p>
                   </div>
                 </li>
               </ul>

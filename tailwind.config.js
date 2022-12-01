@@ -4,11 +4,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        dark50: "#6C6C6C",
         dark100: "#9A9EA6",
         dark200: "#9FA4AE",
         dark: "#000000",
         dark200: "#696969",
         light: "#FFFFFF",
+
         light100: "#F6F5F5",
         titaniumOrange: "#FF7A00",
         titaniumOrange200: "#FFEAD8",

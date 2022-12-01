@@ -4,13 +4,13 @@ import logo from "../../../../asset/images/titanium-logo.png";
 import Image from "next/image";
 import { CiLogout, CiHome, CiSettings } from "react-icons/ci";
 import { FiEdit } from "react-icons/fi";
-import { MdOutlineShoppingCart, MdOutlineMessage } from "react-icons/md";
+import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdNotificationsOutline } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
 import styles from "./SideBar.module.css";
-import { FaRegUser } from "react-icons/fa";
+import { FaRegUser, FaUsers } from "react-icons/fa";
 import { BiStore } from "react-icons/bi";
-import { BsCart3 } from "react-icons/bs";
+import { FcTreeStructure } from "react-icons/fc";
 
 const SideBar = () => {
   return (
@@ -42,27 +42,25 @@ const SideBar = () => {
               />
             </Link>
             <Link href="/admin/orders">
-              <a>Orders</a>
+              <a>Members</a>
             </Link>
           </li>
           <li>
-            <Link href="/vendor/vendor/vendors">
-              <BiStore
-                className={`${styles.icons} ${styles.notificationIcon}`}
+            <Link href="/admin/plans">
+              <FcTreeStructure
+                className={`${styles.icons} ${styles.planIcon}`}
               />
             </Link>
-            <Link href="/vendor/vendor/vendors">
-              <a>Vendors</a>
+            <Link href="/admin/plans">
+              <a>Plans</a>
             </Link>
           </li>
           <li>
             <Link href="/customer/customers">
-              <BsCart3
-                className={`${styles.icons} ${styles.notificationIcon}`}
-              />
+              <FaUsers className={`${styles.icons} ${styles.usersIcon}`} />
             </Link>
-            <Link href="/customer/customers">
-              <a>Customers</a>
+            <Link href="/admin/users">
+              <a>Users</a>
             </Link>
           </li>
           <li>
@@ -75,22 +73,13 @@ const SideBar = () => {
               <a>Analytics</a>
             </Link>
           </li>
-          <li>
-            <Link href="/admin/messages">
-              <MdOutlineMessage
-                className={`${styles.icons} ${styles.notificationIcon}`}
-              />
-            </Link>
-            <Link href="/admin/messages">
-              <a>Messages</a>
-            </Link>
-          </li>
+
           <li>
             <Link href="/admin/content_management">
               <FiEdit className={`${styles.icons} ${styles.managementIcon}`} />
             </Link>
             <Link href="/admin/content_management">
-              <a>Content Management</a>
+              <a>CMS</a>
             </Link>
           </li>
 

@@ -13,6 +13,8 @@ module.exports = {
       icon: { type: Sequelize.STRING, allowNull: false },
       iconId: { type: Sequelize.STRING, allowNull: true },
       title: { type: Sequelize.STRING, allowNull: false },
+      onMaissonete: { type: Sequelize.BOOLEAN, allowNull: true },
+      onTypicalFloor: { type: Sequelize.BOOLEAN, allowNull: true },
       propertyId: { type: Sequelize.INTEGER, allowNull: false },
       createdAt: { type: Sequelize.DATE },
       updatedAt: { type: Sequelize.DATE },

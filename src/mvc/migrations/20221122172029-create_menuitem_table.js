@@ -12,6 +12,7 @@ module.exports = {
       },
       name: { type: Sequelize.STRING, allowNull: false },
       url: { type: Sequelize.STRING, allowNull: false },
+      icon: { type: Sequelize.STRING, allowNull: false },
       createdAt: { type: Sequelize.DATE },
       updatedAt: { type: Sequelize.DATE },
     });

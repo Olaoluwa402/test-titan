@@ -6,6 +6,7 @@ import Membership from "./Membership.js";
 import Property from "./Property.js";
 import PropertyPlan from "./PropertyPlan.js";
 import PropertyFeature from "./PropertyFeature.js";
+import PropertyAddedAdvantage from "./PropertyAddedAdvantage.js";
 import User from "./User.js";
 import Quotation from "./Quotation.js";
 import Setting from "./Setting.js";
@@ -13,6 +14,8 @@ import Slider from "./Slider.js";
 import Team from "./Team.js";
 import MenuItem from "./MenuItem.js";
 import Service from "./Service.js";
+import About from "./About.js";
+import Vision from "./Vision.js";
 import ServiceMenu from "./ServiceMenu.js";
 import Value from "./Value.js";
 import ValueMenu from "./ValueMenu.js";
@@ -33,7 +36,11 @@ ClubPlanBenefit.belongsTo(ClubPlan, {
 
 Property.hasMany(Facility, { as: "facilities", foreignKey: "propertyId" });
 // Facility.belongsTo(Property);
-
+Property.hasMany(PropertyAddedAdvantage, {
+  as: "propertyAdvantages",
+  foreignKey: "propertyId",
+});
+// Facility.belongsTo(Property);
 User.hasMany(Property, { as: "properties", foreignKey: "ownerId" }); //User can have many referral
 Property.belongsTo(User, { as: "owner", foreignKey: "ownerId" }); //member can only have one referral
 
@@ -83,6 +90,7 @@ export {
   User,
   PropertyFeature,
   PropertyPlan,
+  PropertyAddedAdvantage,
   Image,
   Property,
   Quotation,
@@ -91,6 +99,8 @@ export {
   Setting,
   MenuItem,
   Service,
+  About,
+  Vision,
   ServiceMenu,
   Value,
   ValueMenu,

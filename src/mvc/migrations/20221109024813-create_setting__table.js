@@ -23,19 +23,9 @@ module.exports = {
         allowNull: false,
       },
       selectPropertyPlaceholder: { type: Sequelize.STRING, allowNull: false },
-      aboutUsTitle: { type: Sequelize.STRING, allowNull: false },
-      aboutUsText: { type: Sequelize.TEXT, allowNull: false },
+
       company_address: { type: Sequelize.TEXT, allowNull: false },
-      aboutUsImage: { type: Sequelize.STRING, allowNull: false },
-      aboutUsImageId: { type: Sequelize.STRING, allowNull: true },
-      ourVisionTitle: { type: Sequelize.TEXT, allowNull: false },
-      ourVisionText: { type: Sequelize.TEXT, allowNull: false },
-      ourVisionImage: { type: Sequelize.STRING, allowNull: false },
-      ourVisionImageId: { type: Sequelize.STRING, allowNull: true },
-      ourServiceTitle: { type: Sequelize.TEXT, allowNull: false },
-      ourServiceText: { type: Sequelize.TEXT, allowNull: false },
-      ourServiceImage: { type: Sequelize.STRING, allowNull: false },
-      ourServiceImageId: { type: Sequelize.STRING, allowNull: true },
+
       createdAt: { type: Sequelize.DATE },
       updatedAt: { type: Sequelize.DATE },
     });

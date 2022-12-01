@@ -108,6 +108,10 @@ ul {
 
 /*End of Toggle button*/
 
+/* .react-tabs__tab--selected {
+  border-bottom: 2px solid var(--titaniumOrange);
+} */
+
 /*Side Drawer*/
 .side-drawer {
   height: 100%;

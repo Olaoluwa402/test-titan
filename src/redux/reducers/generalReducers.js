@@ -8,7 +8,21 @@ import {
   CLEAR_ERRORS,
 } from "../constants/generalConstants";
 
-export const getHomeDataReducer = (state = {}, action) => {
+let homeDataFromStorage = null;
+const ISSERVER = typeof window === "undefined";
+
+if (!ISSERVER) {
+  homeDataFromStorage = localStorage.getItem("homeData")
+    ? JSON.parse(localStorage.getItem("homeData"))
+    : null;
+}
+
+console.log(homeDataFromStorage, "homeDataFromStorage");
+
+export const getHomeDataReducer = (
+  state = { data: homeDataFromStorage },
+  action
+) => {
   switch (action.type) {
     case GET_HOMEDATA_REQUEST:
       return { loading: true };

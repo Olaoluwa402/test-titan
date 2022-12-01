@@ -6,6 +6,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   margin: 50px auto;
   width: 95%;
 }
@@ -149,7 +150,7 @@
   border-radius: 50%;
   width: 73px;
   height: 73px;
-  background: #ffffff;
+  background: var(--titaniumOrange);
   border: 1px solid var(--titaniumOrange);
   color: white;
   position: absolute;
@@ -237,6 +238,7 @@
 
   .vision,
   .service {
+    width: 100%;
     background: rgba(238, 241, 248, 1);
     background: linear-gradient(
       90deg,

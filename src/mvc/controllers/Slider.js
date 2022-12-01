@@ -2,48 +2,29 @@ import { Slider } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a slider
 // @route POST /api/v1/sliders
 // @access Private - admin
 
 const createSlider = catchAsyncErrors(async (req, res, next) => {
-  const { image, url, description, title } = req.body;
+  const image = req.file.filename;
+  const { url, description, title } = req.body;
 
-  const rgx = /^http/gi;
+  //create slider
+  const slider = await Slider.create({
+    image: image,
+    imageId: "",
+    title,
+    url,
+    description,
+  });
 
-  if (rgx.test(image)) {
-    //create slider
-    const slider = await Slider.create({
-      image,
-      imageId: "",
-      title,
-      url,
-      description,
-    });
-
-    res.status(200).json({
-      status: "success",
-      slider,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(image, "image");
-
-    //create slider
-    const slider = await Slider.create({
-      image: result.secure_url,
-      imageId: result.public_id,
-      title,
-      url,
-      description,
-    });
-
-    res.status(200).json({
-      status: "success",
-      slider,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    slider,
+  });
 });
 
 // @desc Get sliders
@@ -83,7 +64,9 @@ const getSlider = catchAsyncErrors(async (req, res, next) => {
 
 const updateSlider = catchAsyncErrors(async (req, res, next) => {
   const sliderId = req.query.id;
-  const { image, url, description, title } = req.body;
+
+  const image = req.file && req.file.filename ? req.file.filename : "";
+  const { url, description, title } = req.body;
 
   //find slider
   const slider = await Slider.findOne({ where: { id: sliderId } });
@@ -92,30 +75,13 @@ const updateSlider = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  //remove old file from server
+  if (image) {
+    console.log("deleted");
+    await deleteText(`public/${slider.image}`);
   }
 
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", slider.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  slider.image =
-    imageResolved && imageResolved !== slider.image
-      ? imageResolved
-      : slider.image;
-  slider.imageId =
-    imageIdResolved && imageIdResolved !== slider.imageId
-      ? imageIdResolved
-      : slider.imageId;
+  slider.image = image && image !== slider.image ? image : slider.image;
   slider.url = url && url !== slider.url ? url : slider.url;
   slider.description =
     description && description !== slider.description
@@ -144,6 +110,8 @@ const deleteSlider = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${slider.image}`);
+  console.log("deleted fro server");
   //remove found itemm
   await slider.destroy();
 

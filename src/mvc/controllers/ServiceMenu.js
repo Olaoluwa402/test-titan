@@ -2,37 +2,22 @@ import { ServiceMenu } from "../models/central.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a service
 // @route POST /api/v1/services
 // @access Private - admin
 
 const createServiceMenu = catchAsyncErrors(async (req, res, next) => {
-  const { desc, title, icon, serviceId } = req.body;
-
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (icon && rgx.test(icon)) {
-    imageResolved = icon;
-  }
-
-  //upload to cloudinary helper function
-  if (icon && !rgx.test(icon)) {
-    const result = await uploadToCloudinary(icon, "image");
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
+  const icon = req.file.filename;
+  const { desc, title, serviceId } = req.body;
 
   //create service
   const service = await ServiceMenu.create({
     desc,
     title,
     serviceId,
-    icon: imageResolved,
-    iconId: imageIdResolved,
+    icon,
   });
 
   res.status(200).json({
@@ -78,7 +63,8 @@ const getServiceMenu = catchAsyncErrors(async (req, res, next) => {
 
 const updateServiceMenu = catchAsyncErrors(async (req, res, next) => {
   const serviceMenuId = req.query.id;
-  const { desc, title, icon, serviceId } = req.body;
+  const icon = req.file && req.file.filename ? req.file.filename : "";
+  const { desc, title, serviceId } = req.body;
 
   //find faclity
   const service = await ServiceMenu.findOne({ where: { id: serviceMenuId } });
@@ -87,30 +73,13 @@ const updateServiceMenu = catchAsyncErrors(async (req, res, next) => {
     throw new Error("No data found");
   }
 
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (icon && rgx.test(icon)) {
-    imageResolved = icon;
+  //remove old file from server
+  if (icon) {
+    console.log("deleted");
+    await deleteText(`public/${service.icon}`);
   }
 
-  //upload to cloudinary helper function
-  if (icon && !rgx.test(icon)) {
-    const result = await uploadToCloudinary(image, "image", service.iconId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  service.icon =
-    imageResolved && imageResolved !== service.icon
-      ? imageResolved
-      : service.icon;
-  service.iconId =
-    imageIdResolved && imageIdResolved !== service.iconId
-      ? imageIdResolved
-      : service.iconId;
+  service.icon = icon && icon !== service.icon ? icon : service.icon;
 
   service.desc = desc && service.desc !== desc ? desc : service.desc;
   service.title = title && service.title !== title ? title : service.title;
@@ -139,6 +108,8 @@ const deleteServiceMenu = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  //remove iage from server
+  await deleteText(`public/${service.icon}`);
   //remove found itemm
   await service.destroy();
 

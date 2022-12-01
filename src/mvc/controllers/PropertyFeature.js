@@ -2,48 +2,29 @@ import { PropertyFeature } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
+import Property from "../models/central.js";
 
 // @desc Create a property feature
 // @route POST /api/v1/property_features
 // @access Private - admin
 
 const createPropertFeature = catchAsyncErrors(async (req, res, next) => {
-  const { icon, title, description, propertyId } = req.body;
+  const icon = req.file.filename;
+  const { title, description, propertyId } = req.body;
 
-  const rgx = /^http/gi;
+  //create Image
+  const propertyFeature = await PropertyFeature.create({
+    icon,
+    title,
+    description,
+    propertyId,
+  });
 
-  if (rgx.test(icon)) {
-    //create Image
-    const propertyFeature = await PropertyFeature.create({
-      icon: icon,
-      iconId: "",
-      title,
-      description,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      propertyFeature,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(icon, "image");
-
-    //create Image
-    const propertyFeature = await PropertyFeature.create({
-      icon: result.secure_url,
-      iconId: result.public_id,
-      title,
-      description,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      propertyFeature,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    propertyFeature,
+  });
 });
 
 // @desc get property feature
@@ -88,7 +69,8 @@ const getPropertyFeature = catchAsyncErrors(async (req, res, next) => {
 
 const updatePropertyFeature = catchAsyncErrors(async (req, res, next) => {
   const property_featureId = req.query.id;
-  const { icon, title, description, propertyId } = req.body;
+  const icon = req.file && req.file.filename ? req.file.filename : "";
+  const { title, description, propertyId } = req.body;
 
   //find property feature
   const property_feature = await PropertyFeature.findOne({
@@ -101,34 +83,14 @@ const updatePropertyFeature = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
-  const rgx = /^http/gi;
-
-  let iconResolved;
-  let iconIdResolved;
-
-  if (icon && rgx.test(icon)) {
-    iconResolved = icon;
-  }
-
-  //upload to cloudinary helper function
-  if (icon && !rgx.test(icon)) {
-    const result = await uploadToCloudinary(
-      icon,
-      "image",
-      property_feature.iconId
-    );
-    iconResolved = result.secure_url;
-    iconIdResolved = result.public_id;
+  //remove old file from server
+  if (icon) {
+    await deleteText(`public/${property_feature.icon}`);
   }
 
   property_feature.icon =
-    iconResolved && iconResolved !== property_feature.icon
-      ? iconResolved
-      : property_feature.icon;
-  property_feature.iconId =
-    iconIdResolved && iconIdResolved !== property_feature.iconId
-      ? iconIdResolved
-      : property_feature.iconId;
+    icon && icon !== property_feature.icon ? icon : property_feature.icon;
+
   property_feature.description =
     description && description !== property_feature.description
       ? description
@@ -162,7 +124,7 @@ const deletePropertyFeature = catchAsyncErrors(async (req, res, next) => {
   if (!property_feature) {
     return next(new ErrorHandler("No record found"), 404);
   }
-
+  await deleteText(`public/${property_feature.icon}`);
   //remove found itemm
   await property_feature.destroy();
 

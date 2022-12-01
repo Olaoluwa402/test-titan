@@ -10,11 +10,20 @@ import {
   updateTeam,
   getTeam,
 } from "../../../../mvc/controllers/Team.js";
+import { upload } from "../../../../components/Multer.js";
 // import selectOption from "../../../components/selectOptions";
 
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+// upload to server
+let uploadFile = upload.single("image");
 
 // route handler middleware
 const handler = nc({ onError });
@@ -24,7 +33,14 @@ handler
   .get(getTeam);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin"]),
+    uploadFile
+  )
   .put(updateTeam);
 
 handler

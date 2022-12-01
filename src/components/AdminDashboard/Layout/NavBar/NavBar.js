@@ -21,14 +21,6 @@ const NavBar = () => {
 
         <div className={styles.nav_items}>
           <ul>
-            <li className={styles.calendar}>
-              <RiCalendar2Line className={styles.calendarIcon} />
-              <span className={styles.calendar__text}>Today</span>
-            </li>
-            <li className={styles.date}>
-              <span className={styles.date__text}>August, 29</span>
-              <BiChevronDown className={styles.chevronIcon} />
-            </li>
             <li>
               <div
                 className={styles.notification}

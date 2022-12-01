@@ -13,7 +13,7 @@ module.exports = {
       title: { type: Sequelize.STRING, allowNull: false },
       image: { type: Sequelize.STRING, allowNull: false },
       imageId: { type: Sequelize.STRING, allowNull: true },
-      price: { type: Sequelize.STRING, allowNull: false },
+      price: { type: Sequelize.STRING, allowNull: true },
       propertyId: { type: Sequelize.INTEGER, allowNull: false },
       createdAt: { type: Sequelize.DATE },
       updatedAt: { type: Sequelize.DATE },

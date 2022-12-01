@@ -2,36 +2,20 @@ import { Service } from "../models/central.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a service
 // @route POST /api/v1/services
 // @access Private - admin
 
 const createService = catchAsyncErrors(async (req, res, next) => {
-  const { desc, title, image } = req.body;
-
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
-  }
-
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image");
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
+  const image = req.file.filename;
+  const { desc, title } = req.body;
   //create service
   const service = await Service.create({
     desc,
     title,
-    image: imageResolved,
-    imageId: imageIdResolved,
+    image,
   });
 
   res.status(200).json({
@@ -79,7 +63,8 @@ const getService = catchAsyncErrors(async (req, res, next) => {
 
 const updateService = catchAsyncErrors(async (req, res, next) => {
   const serviceId = req.query.id;
-  const { desc, title, image } = req.body;
+  const image = req.file && req.file.filename ? req.file.filename : "";
+  const { desc, title } = req.body;
 
   //find faclity
   const service = await Service.findOne({ where: { id: serviceId } });
@@ -87,30 +72,12 @@ const updateService = catchAsyncErrors(async (req, res, next) => {
   if (!service) {
     throw new Error("No data found");
   }
-  const rgx = /^http/gi;
 
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  //remove old file from server
+  if (image) {
+    await deleteText(`public/${service.image}`);
   }
-
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", service.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  service.image =
-    imageResolved && imageResolved !== service.image
-      ? imageResolved
-      : service.image;
-  service.imageId =
-    imageIdResolved && imageIdResolved !== service.imageId
-      ? imageIdResolved
-      : service.imageId;
+  service.image = image && image !== service.image ? image : service.image;
 
   service.desc = desc && service.desc !== desc ? desc : service.desc;
   service.title = title && service.title !== title ? title : service.title;
@@ -135,6 +102,7 @@ const deleteService = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${service.image}`);
   //remove found itemm
   await service.destroy();
 

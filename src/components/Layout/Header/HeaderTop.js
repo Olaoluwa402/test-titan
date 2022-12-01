@@ -13,8 +13,8 @@ import Link from "next/link";
 import styles from "./HeaderTop.module.css";
 
 const HeaderTop = () => {
-  const settings = useSelector((store) => store.homeData.data.settings[0]);
-
+  const settings = useSelector((store) => store.homeData);
+  const { data } = settings;
   return (
     <div className={styles.container}>
       <div className={`${styles.topBar} wrapper-80`}>
@@ -60,11 +60,19 @@ const HeaderTop = () => {
         <ul className={styles.topBarContact}>
           <li className={styles.topBarContact__items}>
             <FaEnvelope className={`${styles.topIcons}`} />
-            <span>{settings && settings.email ? settings.email : ""}</span>
+            <span>
+              {data && data.settings && data.settings[0].email
+                ? data.settings[0].email
+                : ""}
+            </span>
           </li>
           <li className={styles.topBarContact__items}>
             <FaPhoneAlt className={`${styles.topIcons}`} />
-            <span>{settings && settings.phone ? settings.phone : ""}</span>
+            <span>
+              {data && data.settings && data.settings[0].phone
+                ? data.settings[0].phone
+                : ""}
+            </span>
           </li>
         </ul>
       </div>

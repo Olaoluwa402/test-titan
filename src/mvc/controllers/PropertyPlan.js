@@ -3,46 +3,28 @@ import { PropertyPlan } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a plan
 // @route POST /api/v1/property_plans
 // @access Private - admin
 
 const createPlan = catchAsyncErrors(async (req, res, next) => {
-  const { price, image, title, propertyId } = req.body;
-  const rgx = /^http/gi;
-  if (rgx.test(image)) {
-    //create Image
-    const propertyPlan = await PropertyPlan.create({
-      image: image,
-      imageId: "",
-      title,
-      price,
-      propertyId,
-    });
+  const image = req.file.filename;
+  const { price, title, propertyId } = req.body;
 
-    res.status(200).json({
-      status: "success",
-      propertyPlan,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(image, "image");
+  //create plan
+  const propertyPlan = await PropertyPlan.create({
+    image,
+    title,
+    price,
+    propertyId,
+  });
 
-    //create plan
-    const propertyPlan = await PropertyPlan.create({
-      image: result.secure_url,
-      imageId: result.public_id,
-      title,
-      price,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      propertyPlan,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    propertyPlan,
+  });
 });
 
 // @desc Get plans
@@ -82,7 +64,8 @@ const getPlan = catchAsyncErrors(async (req, res, next) => {
 
 const updatePlan = catchAsyncErrors(async (req, res, next) => {
   const planId = req.query.id;
-  const { price, image, title, propertyId } = req.body;
+  const image = req.file && req.file.filename ? req.file.filename : "";
+  const { price, title, propertyId } = req.body;
 
   //find faclity
   const plan = await PropertyPlan.findOne({ where: { id: planId } });
@@ -91,28 +74,14 @@ const updatePlan = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  //remove old file from server
+  if (image) {
+    console.log("deleted");
+    await deleteText(`public/${plan.image}`);
   }
 
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", plan.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
+  plan.image = image && image !== plan.image ? image : plan.image;
 
-  plan.image =
-    imageResolved && imageResolved !== plan.image ? imageResolved : plan.image;
-  plan.imageId =
-    imageIdResolved && imageIdResolved !== plan.imageId
-      ? imageIdResolved
-      : plan.imageId;
   plan.price = price && price !== plan.price ? price : plan.price;
 
   plan.title = title && title !== plan.title ? title : plan.title;
@@ -140,6 +109,7 @@ const deletePlan = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${plan.image}`);
   //remove found itemm
   await plan.destroy();
 

@@ -9,8 +9,11 @@ import { Team } from "../models/central.js";
 import { Property } from "../models/central.js";
 import { Slider } from "../models/central.js";
 import { Service } from "../models/central.js";
+import { About } from "../models/central.js";
+import { Vision } from "../models/central.js";
 import { ServiceMenu } from "../models/central.js";
 import { PropertyFeature } from "../models/central.js";
+import { PropertyAddedAdvantage } from "../models/central.js";
 import { Image } from "../models/central.js";
 import { User } from "../models/central.js";
 import { Facility } from "../models/central.js";
@@ -41,6 +44,8 @@ const getHomeData = catchAsyncErrors(async (req, res, next) => {
         { model: Image, as: "images" },
         { model: PropertyFeature, as: "propertyFeatures" },
         { model: PropertyPlan, as: "propertyPlans" },
+        { model: PropertyPlan, as: "propertyPlans" },
+        { model: PropertyAddedAdvantage, as: "propertyAdvantages" },
         { model: User, as: "owner" },
       ],
     });
@@ -61,6 +66,11 @@ const getHomeData = catchAsyncErrors(async (req, res, next) => {
     const services = await Service.findAll({
       include: [{ model: ServiceMenu, as: "ServiceMenu" }],
     });
+
+    //find about
+    const about = await About.findAll({});
+    //find vision
+    const vision = await Vision.findAll({});
     const values = await Value.findAll({
       include: [{ model: ValueMenu, as: "ValueMenu" }],
     });
@@ -73,6 +83,8 @@ const getHomeData = catchAsyncErrors(async (req, res, next) => {
         properties,
         clubPlans,
         sliders,
+        vision,
+        about,
         services,
         values,
         menuItems,

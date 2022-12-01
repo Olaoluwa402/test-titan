@@ -9,7 +9,16 @@ import {
   getValueMenus,
   createValueMenu,
 } from "../../../mvc/controllers/ValueMenu.js";
+import { upload } from "../../../components/Multer.js";
 // import selectOption from "../../../components/selectOptions";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+let uploadFile = upload.single("icon");
 
 import morgan from "morgan";
 import cors from "cors";
@@ -19,6 +28,8 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getValueMenus);
-handler.use(morgan("dev"), cors(), cookieParser()).post(createValueMenu);
+handler
+  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .post(createValueMenu);
 
 export default handler;

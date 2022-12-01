@@ -2,46 +2,29 @@ import { Team } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a team
 // @route POST /api/v1/teams
 // @access Private - admin
 
 const createTeam = catchAsyncErrors(async (req, res, next) => {
-  const { image, name, designation } = req.body;
+  // console.log("req.body", req.body);
+  const image = req.file.filename;
+  const { name, designation } = req.body;
 
-  const rgx = /^http/gi;
+  //create team
+  const team = await Team.create({
+    image: image,
+    imageId: "",
+    name,
+    designation,
+  });
 
-  if (rgx.test(image)) {
-    //create team
-    const team = await Team.create({
-      image: image,
-      imageId: "",
-      name,
-      designation,
-    });
-
-    res.status(200).json({
-      status: "success",
-      team,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(image, "image");
-
-    //create team
-    const team = await Team.create({
-      image: result.secure_url,
-      imageId: result.public_id,
-      name,
-      designation,
-    });
-
-    res.status(200).json({
-      status: "success",
-      team,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    team,
+  });
 });
 
 // @desc Get teams
@@ -81,38 +64,21 @@ const getTeam = catchAsyncErrors(async (req, res, next) => {
 
 const updateTeam = catchAsyncErrors(async (req, res, next) => {
   const teamId = req.query.id;
-  const { image, name, designation } = req.body;
-
+  const image = req.file && req.file.filename ? req.file.filename : "";
+  const { name, designation } = req.body;
+  console.log(image);
   //find team
   const team = await Team.findOne({ where: { id: teamId } });
 
   if (!team) {
     return next(new ErrorHandler("No record found"), 404);
   }
-
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  if (image) {
+    await deleteText(`public/${team.image}`);
   }
 
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", team.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  team.image =
-    imageResolved && imageResolved !== team.image ? imageResolved : team.image;
-  team.imageId =
-    imageIdResolved && imageIdResolved !== team.imageId
-      ? imageIdResolved
-      : team.imageId;
-  team.name = name && name !== team.name ? name : team.name;
+  team.image = image && image !== team.image ? image : team.image;
+  team.imageId = team.name = name && name !== team.name ? name : team.name;
   team.designation =
     designation && designation !== team.designation
       ? designation
@@ -139,6 +105,7 @@ const deleteTeam = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${team.image}`);
   //remove found itemm
   await team.destroy();
 

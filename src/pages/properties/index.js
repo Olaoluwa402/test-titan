@@ -34,7 +34,12 @@ function PropertiesScreen() {
         </Modal>
       )}
       {homeRecord && (
-        <Layout> {data && <Properties properties={data.properties} />}</Layout>
+        <Layout>
+          {" "}
+          {data && (
+            <Properties properties={data.properties ? data.properties : ""} />
+          )}
+        </Layout>
       )}
     </>
   );

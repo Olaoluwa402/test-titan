@@ -3,46 +3,29 @@ import { Facility } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a facilty
 // @route POST /api/v1/facilities
 // @access Private - admin
 
 const createFacility = catchAsyncErrors(async (req, res, next) => {
-  const { icon, title, propertyId } = req.body;
+  const icon = req.file.filename;
+  const { title, onMaissonete, onTypicalFloor, propertyId } = req.body;
 
-  const rgx = /^http/gi;
+  //create facility
+  const facility = await Facility.create({
+    icon,
+    title,
+    onMaissonete,
+    onTypicalFloor,
+    propertyId,
+  });
 
-  if (rgx.test(icon)) {
-    //create Image
-    const facility = await Facility.create({
-      icon: icon,
-      iconId: "",
-      title,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      facility,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(icon, "image");
-
-    //create facility
-    const facility = await Facility.create({
-      icon: result.secure_url,
-      iconId: result.public_id,
-      title,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      facility,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    facility,
+  });
 });
 
 // @desc Get facilities
@@ -80,39 +63,30 @@ const getFacility = catchAsyncErrors(async (req, res, next) => {
 
 const updateFacility = catchAsyncErrors(async (req, res, next) => {
   const facilityId = req.query.id;
-  const { icon, title, propertyId } = req.body;
+  const icon = req.file && req.file.filename ? req.file.filename : "";
+  const { title, onMaissonete, onTypicalFloor, propertyId } = req.body;
   //find faclity
   const facility = await Facility.findOne({ where: { id: facilityId } });
   if (!facility) {
     return next(new ErrorHandler("No record found"), 404);
   }
 
-  const rgx = /^http/gi;
-
-  let iconResolved;
-  let iconIdResolved;
-
-  if (icon && rgx.test(icon)) {
-    iconResolved = icon;
+  //remove old file from server
+  if (icon) {
+    await deleteText(`public/${facility.icon}`);
   }
 
-  //upload to cloudinary helper function
-  if (icon && !rgx.test(icon)) {
-    const result = await uploadToCloudinary(icon, "image", facility.iconId);
-    iconResolved = result.secure_url;
-    iconIdResolved = result.public_id;
-  }
+  facility.icon = icon && icon !== facility.icon ? icon : facility.icon;
 
-  facility.icon =
-    iconResolved && iconResolved !== facility.icon
-      ? iconResolved
-      : facility.icon;
-  facility.iconId =
-    iconIdResolved && iconIdResolved !== facility.iconId
-      ? iconIdResolved
-      : facility.iconId;
   facility.title = title && title !== facility.title ? title : facility.title;
-
+  facility.onMaissonete =
+    onMaissonete && onMaissonete !== facility.onMaissonete
+      ? onMaissonete
+      : facility.onMaissonete;
+  facility.onTypicalFloor =
+    onTypicalFloor && onTypicalFloor !== facility.onTypicalFloor
+      ? onTypicalFloor
+      : facility.onTypicalFloor;
   facility.propertyId =
     propertyId && propertyId !== facility.propertyId
       ? propertyId
@@ -135,6 +109,8 @@ const deleteFacility = catchAsyncErrors(async (req, res, next) => {
   if (!facility) {
     return next(new ErrorHandler("No record found"), 404);
   }
+
+  await deleteText(`public/${facility.icon}`);
   //remove found itemm
   await facility.destroy();
   res.status(200).json({

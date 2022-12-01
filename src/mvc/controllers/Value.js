@@ -1,37 +1,22 @@
 import { Value } from "../models/central.js";
+import { ValueMenu } from "../models/central.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a service
 // @route POST /api/v1/services
 // @access Private - admin
 
 const createValue = catchAsyncErrors(async (req, res, next) => {
-  const { desc, title, image } = req.body;
-
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
-  }
-
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image");
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
+  const image = req.file.filename;
+  const { desc, title } = req.body;
 
   //create value
   const value = await Value.create({
     desc,
     title,
-    image: imageResolved,
-    imageId: imageIdResolved,
+    image,
   });
 
   res.status(200).json({
@@ -46,7 +31,7 @@ const createValue = catchAsyncErrors(async (req, res, next) => {
 const getValues = catchAsyncErrors(async (req, res, next) => {
   //find all values
   const values = await Value.findAll({
-    include: [{ model: valueMenu, as: "valueMenu" }],
+    include: [{ model: ValueMenu, as: "ValueMenu" }],
   });
 
   res.json({
@@ -79,7 +64,8 @@ const getValue = catchAsyncErrors(async (req, res, next) => {
 
 const updateValue = catchAsyncErrors(async (req, res, next) => {
   const valueId = req.query.id;
-  const { desc, title, image } = req.body;
+  const image = req.file && req.file.filename ? req.file.filename : "";
+  const { desc, title } = req.body;
 
   //find faclity
   const value = await Value.findOne({ where: { id: valueId } });
@@ -88,30 +74,13 @@ const updateValue = catchAsyncErrors(async (req, res, next) => {
     throw new Error("No data found");
   }
 
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  //remove old file from server
+  if (image) {
+    console.log("deleted");
+    await deleteText(`public/${value.image}`);
   }
 
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", value.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  value.image =
-    imageResolved && imageResolved !== value.image
-      ? imageResolved
-      : value.image;
-  value.imageId =
-    imageIdResolved && imageIdResolved !== value.imageId
-      ? imageIdResolved
-      : value.imageId;
+  value.image = image && image !== value.image ? image : value.image;
 
   value.desc = desc && value.desc !== desc ? desc : value.desc;
   value.title = title && value.title !== title ? title : value.title;
@@ -136,6 +105,7 @@ const deleteValue = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${value.image}`);
   //remove found itemm
   await value.destroy();
 

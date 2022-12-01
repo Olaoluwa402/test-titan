@@ -11,14 +11,16 @@ import {
 
 import { toast } from "react-toastify";
 
-//const API_URL = "http://localhost:8000";
-const API_URL = "http://164.92.84.16";
+const API_URL = "http://localhost:8000";
+//const API_URL = "http://164.92.84.16";
 export const getPropertiesAction = () => async (dispatch) => {
   try {
     dispatch({
       type: GET_PROPERTIES_REQUEST,
     });
-
+    // headers:{
+    //   Content-Type:'multipart/form-data'
+    // }
     const config = {
       headers: {
         "Content-Type": "application/json",

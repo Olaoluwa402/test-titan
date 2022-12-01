@@ -30,7 +30,7 @@ function Hero() {
                 <div
                   className={styles.container}
                   style={{
-                    backgroundImage: `url(${slide.image})`,
+                    backgroundImage: `url(/${slide.image})`,
                     backgroundPosition: "center",
                     backgroundSize: "cover",
                     width: "100%",

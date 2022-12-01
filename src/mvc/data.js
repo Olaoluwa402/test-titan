@@ -3,37 +3,37 @@ module.exports = {
     {
       url: "/",
       name: "Home",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/#about",
       name: "About Us",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/#services",
       name: "Services",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/investment_club",
       name: "Investment Club",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/properties",
       name: "Properties",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/#contact",
       name: "Contact us",
-      icon: "",
+      // icon: "",
     },
     {
       url: "/policy",
       name: "Private Policy",
-      icon: "",
+      // icon: "",
     },
   ],
   clubPlanBenefits: [
@@ -82,6 +82,7 @@ module.exports = {
       video_url:
         "https://player.vimeo.com/progressive_redirect/playback/709838594/rendition/540p/file.mp4?loc=external&oauth2_token_id=57447761&signature=89b8c7afdb9c548b1dd98421915d41ede293846e2a98d45ece810de234e95846",
       title: "Rosewood Detached Villas",
+      sub_title: "",
       description:
         "Eight numbers of beautiful townhouses, created to get you the most out of each  space. With state of the art minimalist architecture, and well planned and carefully designed spaces, we provide for you a luxurious minimalist piece of architecture,to create an idyllic environment to create beautiful memories with you and yours.",
       pricing: "₦69,250,000",
@@ -325,20 +326,6 @@ module.exports = {
       selectPropertyPlaceholder: "Select Property Type",
       aboutUsTitle: "About Us",
       company_address: "50, Tapa Street, Ebute-Metta, Yaba, Lagos",
-      aboutUsText:
-        "Titanium Africa is a proptech company looking to solve the housing problem in Nigeria and Africa at large. With Nigeria’s housing deficit standing at about 20 million units, Titanium Africa aims to provide quality, affordable housing for everybody.",
-      aboutUsImage:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669141108/titanium/about1_rzsyde.png",
-      ourVisionTitle: "Our Vision",
-      ourVisionText:
-        "Established in 2021, with the vision to create Africa’s largest housing chain for low and middle income earners.",
-      ourVisionImage:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669141239/titanium/61b79f9d-540a-46c2-825b-87ab26ec77e4_1_uxn5fq.png",
-      ourServiceTitle: "Our Services",
-      ourServiceText:
-        "We offer excellent services in building smart enabled, eco-friendly and functional homes. We make relative luxurious accommodation affordable.",
-      ourServiceImage:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669246071/titanium/PHOTO-2018-10-20-12-59-52_1_w7u2ba.png",
     },
   ],
   sliders: [
@@ -366,22 +353,19 @@ module.exports = {
   ],
   teams: [
     {
-      image:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669141778/titanium/unsplash_L9kkqzo_cI8_vjavpd.png",
-      name: "John Doe",
-      designation: "Software Engineer",
+      image: "abolore-salami.png",
+      name: "Salami Abolore ",
+      designation: "Venture Partner",
     },
     {
-      image:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669141807/titanium/Shola_Ayewumi_1_xw05fi.png",
-      name: "Marry Lane",
-      designation: "Software Engineer",
+      image: "AdeyemoAdedayo.png",
+      name: "Adeyemo Adedayo",
+      designation: "Chief Designer & Managing Director",
     },
     {
-      image:
-        "https://res.cloudinary.com/dklrn1vdy/image/upload/v1669141837/titanium/Abolore-Salami_1_tboyed.png",
-      name: "Prosper Ridwan",
-      designation: "Software Engineer",
+      image: "SholaAyewumi.png",
+      name: "Shola Ayewumi",
+      designation: "Director Finance and Strategy",
     },
   ],
   users: [

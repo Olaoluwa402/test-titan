@@ -9,7 +9,16 @@ import {
   getServices,
   createService,
 } from "../../../mvc/controllers/Service.js";
+import { upload } from "../../../components/Multer.js";
 // import selectOption from "../../../components/selectOptions";
+
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
+let uploadFile = upload.single("image");
 
 import morgan from "morgan";
 import cors from "cors";
@@ -19,6 +28,8 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getServices);
-handler.use(morgan("dev"), cors(), cookieParser()).post(createService);
+handler
+  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .post(createService);
 
 export default handler;

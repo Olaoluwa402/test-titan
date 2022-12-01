@@ -3,44 +3,26 @@ import { Image } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
+import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a Image
 // @route POST /api/v1/images
 // @access Private - admin
 
 const createImage = catchAsyncErrors(async (req, res, next) => {
-  const { images, propertyId } = req.body;
+  const { propertyId } = req.body;
+  const image = req.file.filename;
 
-  const rgx = /^httpohjhj/gi;
+  //create Image
+  const createdImage = await Image.create({
+    url: image,
+    propertyId,
+  });
 
-  if (rgx.test(image)) {
-    //create Image
-    const createdImage = await Image.create({
-      url: image,
-      imageId: "",
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      image: createdImage,
-    });
-  } else {
-    //upload to cloudinary helper function
-    const result = await uploadToCloudinary(image, "image");
-
-    //create Image
-    const createdImage = await Image.create({
-      url: result.secure_url,
-      imageId: result.public_id,
-      propertyId,
-    });
-
-    res.status(200).json({
-      status: "success",
-      image: createdImage,
-    });
-  }
+  res.status(200).json({
+    status: "success",
+    image: createdImage,
+  });
 });
 
 // @desc Get Images
@@ -80,7 +62,8 @@ const getImage = catchAsyncErrors(async (req, res, next) => {
 
 const updateImage = catchAsyncErrors(async (req, res, next) => {
   const imageUrlId = req.query.id;
-  const { image, propertyId } = req.body;
+  const { propertyId } = req.body;
+  const image = req.file && req.file.filename ? req.file.filename : "";
 
   //find Image
   const imageFound = await Image.findOne({ where: { id: imageUrlId } });
@@ -89,31 +72,13 @@ const updateImage = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
-  const rgx = /^http/gi;
-
-  let imageResolved;
-  let imageIdResolved;
-
-  if (image && rgx.test(image)) {
-    imageResolved = image;
+  //remove old file from server
+  if (image) {
+    console.log("deleted");
+    await deleteText(`public/${imageFound.url}`);
   }
 
-  //upload to cloudinary helper function
-  if (image && !rgx.test(image)) {
-    const result = await uploadToCloudinary(image, "image", imageFound.imageId);
-    imageResolved = result.secure_url;
-    imageIdResolved = result.public_id;
-  }
-
-  imageFound.url =
-    imageResolved && imageResolved !== imageFound.url
-      ? imageResolved
-      : imageFound.url;
-  imageFound.imageId =
-    imageIdResolved && imageIdResolved !== imageFound.imageId
-      ? imageIdResolved
-      : imageFound.imageId;
-
+  imageFound.url = image && image !== imageFound.url ? image : imageFound.url;
   imageFound.propertyId =
     propertyId && propertyId !== imageFound.propertyId
       ? propertyId
@@ -140,6 +105,7 @@ const deleteImage = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("No record found"), 404);
   }
 
+  await deleteText(`public/${image.url}`);
   //remove found itemm
   await image.destroy();
 

@@ -6,6 +6,7 @@ const MenuItem = db.define(
   {
     name: { type: DataTypes.STRING, allowNull: false },
     url: { type: DataTypes.STRING, allowNull: false },
+    icon: { type: DataTypes.STRING, allowNull: false },
   },
   {}
 );
