@@ -1,9 +1,8 @@
 import { PropertyFeature } from "../models/central.js";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
 import { deleteText } from "../../components/FsUtil.js";
-import Property from "../models/central.js";
+import { Property } from "../models/central.js";
 
 // @desc Create a property feature
 // @route POST /api/v1/property_features
