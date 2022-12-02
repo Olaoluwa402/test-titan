@@ -18,9 +18,17 @@ const InvestmentPlans = () => {
       {plans && plans.clubPlans && plans.clubPlans.length > 0 ? (
         plans.clubPlans.map((plan) => (
           <div key={plan.id} className={styles.card}>
-            <div className={`${styles.cardHeader} ${styles.cardHeaderSilver} `}>
+            <div
+              className={`${styles.cardHeader} ${
+                plan.title === "silver"
+                  ? "cardHeaderSilver"
+                  : plan.title === "gold"
+                  ? "cardHeaderGold"
+                  : "cardHeaderDiamond"
+              } `}
+            >
               <h4>{plan.title}</h4>
-              <h5 className={styles.pricing}>{plan.price}</h5>
+              <h5 className={styles.pricing}>${plan.price}</h5>
               <p className={styles.cardHeadertext}>{plan.short_desc} </p>
             </div>
             <div className={styles.cardBody}>

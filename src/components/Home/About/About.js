@@ -44,7 +44,7 @@ function About() {
                 src={`/${vision[0].image}`}
                 alt="ourvision"
                 width={690}
-                height={580}
+                height={500}
               />
             </div>
 
@@ -100,7 +100,7 @@ function About() {
               src={`/${services[0].image}`}
               alt="ourvision"
               width={690}
-              height={580}
+              height={500}
             />
           </div>
         </div>

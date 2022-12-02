@@ -13,8 +13,9 @@
   flex-basis: 375px;
   height: 780px;
   margin: 20px 0;
-  border-radius: 20px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  background: #ffffff;
+  box-shadow: 0px 4px 67px rgba(0, 0, 0, 0.12);
+  border-radius: 16px;
   padding: 0 0 1rem 0;
   margin-right: 15px;
 }
@@ -33,28 +34,16 @@
   border-top-right-radius: 20px;
 }
 
-.cardHeaderSilver {
-  background: linear-gradient(
-    102.4deg,
-    #c5c5c5 40.99%,
-    rgba(197, 197, 197, 0.8) 107.27%
-  );
-}
-.cardHeaderGold {
-  background: linear-gradient(47.6deg, #fdd36b 19.63%, #c69c30 93.6%);
-}
-.cardHeaderDiamond {
-  background: linear-gradient(
-    96.65deg,
-    #c8d8ff 13.17%,
-    rgba(174, 179, 192, 0.8) 106.36%
-  );
-}
-
 .cardHeader h4 {
-  font-weight: 600;
-  font-size: 22px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 800;
+  font-size: 42px;
+  line-height: 61px;
+  text-align: center;
   text-transform: capitalize;
+  /* Blue Real estate */
+  color: #141d32;
 }
 
 .cardHeader .pricing {
@@ -62,8 +51,15 @@
   font-size: 42px;
 }
 .cardHeader p {
-  font-weight: 600;
-  font-size: 16px;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+
+  color: #6c6c6c;
 }
 
 /* card body section */

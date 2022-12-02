@@ -12,6 +12,7 @@ import { getHomeDataAction } from "../../redux/actions/generalActions";
 import styles from "./SingleProperty.module.css";
 import Title from "../Home/Title/Title";
 import floorBg from "../../asset/images/naira.png";
+import PropertyImages from "./PropertyImages";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 
@@ -120,7 +121,8 @@ const SingleProperty = () => {
                 {property && property.property.description}
               </p>
               <div className="flex flex-col md:flex-row items-center justify-center my-3">
-                {property &&
+                <PropertyImages property={property} />
+                {/* {property &&
                   property.property.images &&
                   property.property.images.length > 0 &&
                   property.property.images.map((image) => (
@@ -132,7 +134,7 @@ const SingleProperty = () => {
                         height={258}
                       />{" "}
                     </div>
-                  ))}
+                  ))} */}
               </div>
             </div>
             {/* end of images */}
@@ -246,7 +248,7 @@ const SingleProperty = () => {
                     {property.property.propertyFeatures.map((feature) => (
                       <div
                         key={feature.id}
-                        className="w-[290px] h-[200px] flex flex-col    items-center justify-center  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
+                        className="w-[290px] h-[200px] flex flex-col  bg-slate-50 drop-shadow-md my-3 mr-3 rounded-lg p-3"
                       >
                         {" "}
                         <div className="sm:w-[64px] mr-3">
@@ -259,11 +261,11 @@ const SingleProperty = () => {
                             />
                           </div>
                         </div>
-                        <div className="basis-full sm:basis-full flex justify-center items-center">
+                        <div className="basis-full sm:basis-full flex  items-center">
                           {" "}
                           <p className="">{feature.title}</p>
                         </div>
-                        <div className="basis-full sm:basis-full flex justify-center items-center">
+                        <div className="basis-full sm:basis-full flex  items-center">
                           {" "}
                           <p className="text-dark50 text-[14px]">
                             {feature.description}

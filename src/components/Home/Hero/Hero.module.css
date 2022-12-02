@@ -31,15 +31,23 @@
 }
 
 .hero_heading {
-  font-size: 1.8rem;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 61px;
+  text-align: center;
   color: #ffffff;
-  font-weight: bold;
 }
 
 .hero_message {
-  font-size: 14px;
-  color: #e2e2e2;
-  margin: 20px 0;
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 20px;
+  color: #ffffff;
+  margin-bottom: 20px;
 }
 
 .hero__cta {

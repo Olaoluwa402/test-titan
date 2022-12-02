@@ -136,12 +136,17 @@
 
 .card {
   width: 300px;
-  height: 283px;
+  height: 260px;
   background: #f2f6ff;
   border-radius: 16px;
   position: relative;
   margin-bottom: 2rem;
   margin-right: 0;
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .vectorContainer {
@@ -160,16 +165,12 @@
 }
 
 .cardTitle {
-  height: 43px;
   font-family: "Plus Jakarta Sans";
   font-style: normal;
   font-weight: 700;
   font-size: 22px;
   line-height: 42px;
   color: #141d32;
-  padding-top: 4rem;
-  padding-left: 15px;
-  margin-bottom: 25px;
   text-transform: capitalize;
 }
 
@@ -180,9 +181,9 @@
   font-weight: 400;
   font-size: 14px;
   color: #6c6c6c;
-  padding-top: 1rem;
-  padding-left: 15px;
-  padding-top: 25px;
+  margin-top: 0.8rem;
+  /* padding-left: 15px;
+  padding-top: 25px; */
 }
 
 /*service styling*/
@@ -237,14 +238,22 @@
     font-size: 30px;
   }
 
-  .vision,
-  .service {
+  .vision {
     width: 100%;
     background: rgba(238, 241, 248, 1);
     background: linear-gradient(
       90deg,
       rgba(255, 122, 0, 1) 20%,
       rgba(238, 241, 248, 1) 20%
+    );
+  }
+  .service {
+    width: 100%;
+    background: rgb(238, 241, 248);
+    background: linear-gradient(
+      90deg,
+      rgba(238, 241, 248, 1) 80%,
+      rgba(255, 122, 0, 1) 80%
     );
   }
 }

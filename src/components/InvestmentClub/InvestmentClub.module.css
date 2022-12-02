@@ -36,6 +36,26 @@
   font-size: 16px;
 }
 
+.title {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 45px;
+  line-height: 61px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.short_desc {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 30px;
+  text-align: center;
+  color: #ffffff;
+}
+
 @media (max-width: 768px) {
   .textContainer p {
     width: 95vw;

@@ -219,6 +219,25 @@ ul {
 }
 /*End side drawer*/
 
+/* club embership plan */
+.cardHeaderSilver {
+  background: linear-gradient(
+    102.4deg,
+    #c5c5c5 40.99%,
+    rgba(197, 197, 197, 0) 107.27%
+  );
+}
+.cardHeaderGold {
+  background: linear-gradient(47.6deg, #fdd36b 19.63%, #c69c30 93.6%);
+}
+.cardHeaderDiamond {
+  background: linear-gradient(
+    96.65deg,
+    #c8d8ff 13.17%,
+    rgba(174, 179, 192, 0.8) 106.36%
+  );
+}
+
 @media (max-width: 1180px) {
   .wrapper-80 {
     width: 90%;

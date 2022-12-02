@@ -236,6 +236,7 @@ const Register = () => {
                     <option value=""> Select Status</option>
                     <option value="single">Single</option>
                     <option value="married">Married</option>
+                    <option value="engaged">Engaged</option>
                   </select>
 
                   {errors.maritalStatus && touched.maritalStatus && (
@@ -264,8 +265,9 @@ const Register = () => {
                   >
                     <option value="">Select Status</option>
                     <option value="employed">Employed</option>
-                    <option value="student">Student</option>
                     <option value="unemployed">Unemployed</option>
+                    <option value="selfemployed">Self Employed</option>
+                    <option value="employer">Employer</option>
                   </select>
                   {errors.employmentStatus && touched.employmentStatus && (
                     <p className={styles.error}>{errors.employmentStatus}</p>
@@ -360,7 +362,11 @@ const Register = () => {
                     className="flex-1 py-3 rounded px-3 focus:outline-0 px-6 bg-titaniumGray40 border border-text-titaniumGray30"
                   >
                     <option value="">Select</option>
+                    <option value="friend">Friend</option>
+                    <option value="company">Company</option>
                     <option value="social media">Social Media</option>
+                    <option value="email">Email</option>
+                    <option value="others">Others</option>
                   </select>
                 </div>
 

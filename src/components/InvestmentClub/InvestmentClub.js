@@ -15,8 +15,8 @@ const InvestmentClub = () => {
     <div className={styles.container}>
       <div className={styles.containerInner} style={style}>
         <div className={styles.textContainer}>
-          <h2>Investment club Plans</h2>
-          <p>
+          <h2 className={styles.title}>Investment club Plans</h2>
+          <p className={styles.short_desc}>
             Group Housing Investment Club allows you and other investors jointly
             invest in Titaniums property development scheme.
           </p>
