@@ -3,7 +3,7 @@ import { PropertyPlan } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { readText, deleteText } from "../../components/fsUtil.js";
+import { deleteText } from "../../components/FsUtil.js";
 
 // @desc Create a plan
 // @route POST /api/v1/property_plans

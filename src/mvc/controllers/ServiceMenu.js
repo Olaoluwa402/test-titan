@@ -1,8 +1,7 @@
 import { ServiceMenu } from "../models/central.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
-import { readText, deleteText } from "../../components/fsUtil.js";
+import { deleteText } from "../../components/FsUtil.js";
 
 // @desc Create a service
 // @route POST /api/v1/services

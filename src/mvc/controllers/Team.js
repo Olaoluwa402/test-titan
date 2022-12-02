@@ -1,8 +1,7 @@
 import { Team } from "../models/central.js";
-import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
+import { deleteText } from "../../components/FsUtil.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";
-import { readText, deleteText } from "../../components/fsUtil.js";
 
 // @desc Create a team
 // @route POST /api/v1/teams
