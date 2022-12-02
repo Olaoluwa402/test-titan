@@ -13,6 +13,7 @@
   font-weight: 700;
   font-size: 30px;
   line-height: 61px;
+  text-transform: capitalize;
 }
 
 @media (min-width: 780px) {

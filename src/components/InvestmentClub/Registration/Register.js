@@ -83,7 +83,7 @@ const Register = () => {
   //club plans
   const selectClubPlan = data.clubPlans.map((item) => (
     <option key={item.id} value={item.id}>
-      {item.title}
+      ${item.price}
     </option>
   ));
   return (

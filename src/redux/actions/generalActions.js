@@ -11,7 +11,7 @@ import {
 
 import { toast } from "react-toastify";
 
-// const API_URL = "http://localhost:8000";
+//const API_URL = "http://localhost:8000";
 const API_URL = "http://164.92.84.16";
 
 export const getHomeDataAction = () => async (dispatch) => {

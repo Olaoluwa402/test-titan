@@ -53,7 +53,7 @@ function Properties({ properties }) {
           properties.map((property) => (
             <div
               key={property.id}
-              className="max-w-[300px] mx-auto md:max-w-[340px] lg:max-w-[380px] h-[536px] flex flex-col justify-center items-center border-1 bg-white border-slate-200 drop-shadow-md rounded-lg"
+              className="max-w-[300px] md:max-w-[340px] mx-auto h-[536px] flex flex-col justify-center items-center border-1 bg-white border-slate-200 drop-shadow-md rounded-lg"
             >
               <Link href={`/properties/[id]`} as={`/properties/${property.id}`}>
                 <a>
