@@ -20,8 +20,8 @@ function About() {
           <Title>{about[0].title}</Title>
           <p className={styles.aboutText}>{about[0].desc}</p>
 
-          <div className="w-full flex justify-center items-center">
-            <div className="w-full h-[400px] md:h-[520px] mx-auto my-12 relative">
+          <div className="w-full flex justify-center items-center ">
+            <div className="w-full h-[400px] md:h-[520px] mx-auto my-12 relative px-0">
               <Image
                 src={`/${about[0].image}`}
                 alt="aboutus"
@@ -43,16 +43,16 @@ function About() {
               <Image
                 src={`/${vision[0].image}`}
                 alt="ourvision"
-                width={547}
+                width={690}
                 height={417}
               />
             </div>
 
             <div className="p-4 md:p-6">
-              <div className="max-w-[550px]">
-                <h2 className={styles.vision__Title}>{about[0].title}</h2>
+              <div className="max-w-[600px]">
+                <h2 className={styles.vision__Title}>{vision[0].title}</h2>
                 <hr className="my-4 w-[80px] h-[4px] bg-titaniumOrange border-0 dark:bg-gray-700" />
-                <p className={styles.vision__Text}>{about[0].desc}</p>
+                <p className={styles.vision__Text}>{vision[0].desc}</p>
               </div>
             </div>
           </div>
@@ -88,18 +88,18 @@ function About() {
       {/* our servces */}
       <div className={styles.service} id="services">
         <div className={styles.service_Inner}>
-          <div className="p-4 md:p-6 ">
-            <div className="max-w-[550px]">
+          <div className="py-4 md:py-6 ">
+            <div className="max-w-[600px]">
               <h2 className={styles.service__Title}>{services[0].title}</h2>
               <hr className="my-4 w-[80px] h-[4px] bg-titaniumOrange border-0 dark:bg-gray-700" />
               <p className={styles.service__Text}>{services[0].desc}</p>
             </div>
           </div>
-          <div className="p-4 md:p-6 mb-6 md:mb-0">
+          <div className="py-4 md:py-6 mb-6 md:mb-0">
             <Image
               src={`/${services[0].image}`}
               alt="ourvision"
-              width={547}
+              width={690}
               height={417}
             />
           </div>

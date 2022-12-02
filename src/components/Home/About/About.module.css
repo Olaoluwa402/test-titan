@@ -129,7 +129,7 @@
 
 .cardContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   margin-top: 5rem;
   flex-wrap: wrap;
 }
@@ -141,6 +141,7 @@
   border-radius: 16px;
   position: relative;
   margin-bottom: 2rem;
+  margin-right: 0;
 }
 
 .vectorContainer {
@@ -199,7 +200,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 2rem 0;
+  padding: 2rem 0.5rem;
 }
 
 .service__Title {
@@ -229,7 +230,7 @@
     width: 80%;
     margin: 0 auto;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
   }
   .vision__Title,
   .service__Title {
@@ -249,9 +250,13 @@
 }
 
 @media (min-width: 920px) {
-  .container {
-    width: 80%;
+  .container,
+  .vision_Inner,
+  .service_Inner,
+  .valuesContainer {
+    width: 75%;
   }
+
   .aboutText {
     text-align: center;
     max-width: 980px;
@@ -260,10 +265,16 @@
   .vision__Title {
     text-align: start;
   }
+  .card {
+    margin-right: 50px;
+  }
 }
 
 /* 'laptop': '1024px' */
 @media (min-width: 1024px) {
+  .service_Inner {
+    padding: 2rem 0;
+  }
 }
 
 /* 'desktop': '1280px', */

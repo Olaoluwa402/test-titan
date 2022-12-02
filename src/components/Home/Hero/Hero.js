@@ -52,7 +52,7 @@ function Hero() {
         </Carousel>
       </div>
 
-      <div className="hidden lg:block w-full mx-auto absolute bottom-12 left-0 right-0">
+      <div className="hidden xl:block w-4/5 mx-auto absolute bottom-12 left-0 right-0">
         <HeroSelecBar />
       </div>
     </div>

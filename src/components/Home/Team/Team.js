@@ -4,7 +4,7 @@ import Title from "../Title/Title";
 
 const Team = ({ teams }) => {
   return (
-    <div className="text-center my-[100px]">
+    <div className="md:w-3/4 mx-auto text-center my-[100px]">
       <Title>Our Team</Title>
 
       {/* team */}

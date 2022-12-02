@@ -29,7 +29,7 @@ export const getHomeDataAction = () => async (dispatch) => {
     const { data } = await axios.get(`${API_URL}/api`, {}, config);
     console.log(data.data);
 
-    if (data) {
+    if (data && data.data) {
       localStorage.setItem("homeData", JSON.stringify(data));
       dispatch({
         type: GET_HOMEDATA_SUCCESS,

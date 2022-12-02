@@ -20,9 +20,32 @@ function Properties({ properties }) {
     // vertical: false,
     nextArrow: <NextSlideIcon />,
     // prevArrow: <PrevSlideIcon />,
+    responsive: [
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1280,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+        },
+      },
+      // {
+      //   breakpoint: ,
+      //   settings: {
+      //     slidesToShow: 3,
+      //     slidesToScroll: 3,
+      //   },
+      // },
+    ],
   };
   return (
-    <div className="w-4/5 mx-auto">
+    <div className="w-full px-6 lg:w-3/4 mx-auto">
       <Title>Our Properties</Title>
       <Slider {...settings}>
         {properties &&
@@ -30,7 +53,7 @@ function Properties({ properties }) {
           properties.map((property) => (
             <div
               key={property.id}
-              className="max-w-[380px] max-h-[536px] flex flex-col justify-center items-center border-1 bg-white border-slate-200 drop-shadow-md rounded-lg"
+              className="max-w-[300px] mx-auto md:max-w-[340px] lg:max-w-[380px] h-[536px] flex flex-col justify-center items-center border-1 bg-white border-slate-200 drop-shadow-md rounded-lg"
             >
               <Link href={`/properties/[id]`} as={`/properties/${property.id}`}>
                 <a>
@@ -83,7 +106,7 @@ function NextSlideIcon(props) {
       style={{
         display: "block",
         position: "absolute",
-        right: "88px",
+        right: "30px",
         top: "40%",
       }}
       onClick={onClick}
