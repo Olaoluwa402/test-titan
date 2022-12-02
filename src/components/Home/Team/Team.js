@@ -15,12 +15,12 @@ const Team = ({ teams }) => {
               key={item.id}
               className="max-w-[450px] max-h-fit flex flex-col items-center my-6 mr-0 md:mr-3"
             >
-              <div className="w-[300px] h-[300px] rounded-full overflow-hidden">
+              <div className="w-[350px] h-[350px] rounded-full overflow-hidden">
                 <Image
                   src={`/${item.image}`}
                   alt="team"
-                  width={300}
-                  height={300}
+                  width={350}
+                  height={350}
                 />
               </div>
               <h3 className="my-3 text-dark font-Jakarta font-bold text-[24px]">
