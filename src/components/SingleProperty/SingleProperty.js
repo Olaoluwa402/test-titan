@@ -363,7 +363,9 @@ const SingleProperty = () => {
                         {property && property.property.location}
                       </h3>
                       <p className="text-dark text-[40px] font-Jakarta font-bold">
-                        ₦{property && property.property.pricing}
+                        {property &&
+                          property.property.pricing &&
+                          `₦${property.property.pricing}`}
                       </p>
                       <p className="font-Jakarta" style={{ color: "#9FA4AE" }}>
                         Outright Purchase

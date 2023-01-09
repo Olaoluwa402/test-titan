@@ -28,9 +28,7 @@ const createAbout = catchAsyncErrors(async (req, res, next) => {
 // @access Public
 const getAbouts = catchAsyncErrors(async (req, res, next) => {
   //find all abouts
-  const abouts = await About.findAll({
-    include: [{ model: aboutMenu, as: "aboutMenu" }],
-  });
+  const abouts = await About.findAll();
 
   res.json({
     status: "success",
@@ -63,7 +61,9 @@ const getAbout = catchAsyncErrors(async (req, res, next) => {
 const updateAbout = catchAsyncErrors(async (req, res, next) => {
   const aboutId = req.query.id;
   const image = req.file && req.file.filename ? req.file.filename : "";
-  const { desc, title } = req.body;
+  console.log(req.file, "body");
+
+  const { title, desc } = req.body;
 
   //find faclity
   const about = await About.findOne({ where: { id: aboutId } });

@@ -120,7 +120,9 @@ const deletePropertyAddedAdanvatge = catchAsyncErrors(
 
     //find the facility
     const property = await PropertyAddedAdvantage.findOne({
-      id: property_featureId,
+      where: {
+        id: property_featureId,
+      },
     });
     if (!property) {
       return next(new ErrorHandler("No record found"), 404);

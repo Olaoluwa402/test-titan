@@ -8,10 +8,9 @@ import CustomModal from "../../Modals/CustomModal/CustomModal";
 import Success from "../../Success/Success";
 import { useFormik } from "formik";
 import { Schema } from "./Schema";
-import { registerClubPlanAction } from "../../../redux/actions/clubPlanActions";
-import { REGISTERCLUBPLAN_RESET } from "../../../redux/constants/clubPlanConstants";
-import Lottie from "lottie-react";
-import Spinner from "../../../asset/Lottie/29192-spinner-loader-animation.json";
+import { createMemberAction } from "../../../redux/actions/memberActions";
+import { CREATE_MEMBER_RESET } from "../../../redux/constants/memberConstants";
+import Loader from "../../../components/Spinner/Spinner";
 
 import styles from "./Register.module.css";
 import "react-datepicker/dist/react-datepicker.css";
@@ -24,12 +23,12 @@ const Register = () => {
   const store = useSelector((store) => store.homeData);
   const { loading, data } = store;
 
-  const member = useSelector((store) => store.registerClubPlan);
+  const member = useSelector((store) => store.newMember);
   const { loading: loadingRegisterMember, success } = member;
 
   useEffect(() => {
     if (success) {
-      dispatch({ type: REGISTERCLUBPLAN_RESET });
+      dispatch({ type: CREATE_MEMBER_RESET });
       setModalOpen(true);
     }
   }, [success, dispatch]);
@@ -64,7 +63,7 @@ const Register = () => {
           heard_about: values.aboutUs,
           refer_friend: values.refer_friend,
         };
-        dispatch(registerClubPlanAction(details));
+        dispatch(createMemberAction(details));
 
         actions.resetForm();
       },
@@ -399,7 +398,7 @@ const Register = () => {
             </div>
 
             {loadingRegisterMember ? (
-              <Lottie animationData={Spinner} loop={true} />
+              <Loader />
             ) : (
               <button
                 type="submit"

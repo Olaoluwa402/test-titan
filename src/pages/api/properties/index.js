@@ -34,7 +34,7 @@ handler
     cors(),
     cookieParser(),
     protect,
-    authorizeUser(["admin"]),
+    authorizeUser(["admin", "super-admin"]),
     uploadFile
   )
   .post(createProperty);

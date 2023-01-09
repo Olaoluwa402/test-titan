@@ -1,8 +1,4 @@
 import React from "react";
-import { MdContactPhone } from "react-icons/md";
-import { RiServiceFill } from "react-icons/ri";
-import { GiPayMoney, GiFamilyHouse } from "react-icons/gi";
-import { BsInfoSquareFill } from "react-icons/bs";
 import { useSelector } from "react-redux";
 import logo from "../../asset/images/titanium-logo.png";
 import Image from "next/image";

@@ -7,12 +7,15 @@ import ErrorHandler from "../utils/errorHandler.js";
 // @access Private
 
 const createQuotation = catchAsyncErrors(async (req, res, next) => {
-  const { title, detail } = req.body;
+  const { title, email, phone, fullName, agreement } = req.body;
 
   //create quotation
   const quotation = await Quotation.create({
     title,
-    detail,
+    email,
+    phone,
+    fullName,
+    agreement,
   });
 
   res.status(200).json({
@@ -26,7 +29,7 @@ const createQuotation = catchAsyncErrors(async (req, res, next) => {
 // @access Private
 const getQuotations = catchAsyncErrors(async (req, res, next) => {
   //find all quotations
-  const quotations = await Quotation.find({});
+  const quotations = await Quotation.findAll({});
 
   res.json({
     status: "success",

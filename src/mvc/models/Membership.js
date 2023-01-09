@@ -11,13 +11,13 @@ const Membership = db.define(
     phone: { type: DataTypes.STRING, allowNull: true },
     marital_Status: {
       type: DataTypes.ENUM,
-      values: ["single", "married"],
+      values: ["single", "married", "engaged"],
       allowNull: true,
       defaultValue: "single",
     },
     employment_status: {
       type: DataTypes.ENUM,
-      values: ["employed", "unemployed", "self-employed", "student"],
+      values: ["employed", "unemployed", "self-employed", "employer"],
       allowNull: true,
       defaultValue: "employed",
     },

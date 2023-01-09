@@ -1,5 +1,6 @@
 import db from "../database/db.js";
 import { Image } from "../models/central.js";
+import { Property } from "../models/central.js";
 import { uploadToCloudinary } from "../utils/uploadToCloudinary.js";
 import catchAsyncErrors from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../utils/errorHandler.js";

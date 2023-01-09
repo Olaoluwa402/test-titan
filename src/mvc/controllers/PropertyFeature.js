@@ -117,9 +117,8 @@ const deletePropertyFeature = catchAsyncErrors(async (req, res, next) => {
   const property_featureId = req.query.id;
 
   //find the facility
-  const property_feature = await PropertyFeature.findOne({
-    id: property_featureId,
-  });
+  const property_feature = await PropertyFeature.findByPk(property_featureId);
+  console.log(property_feature, "pfor");
   if (!property_feature) {
     return next(new ErrorHandler("No record found"), 404);
   }

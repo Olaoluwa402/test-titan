@@ -51,6 +51,11 @@ ul {
   margin: 0;
 }
 
+button:disabled {
+  background-color: #a6a6a6;
+  cursor: not-allowed;
+}
+
 /* End reset */
 
 .wrapper-80 {

@@ -25,6 +25,15 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getPlans);
-handler.use(morgan("dev"), cors(), cookieParser(), uploadFile).post(createPlan);
+handler
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"]),
+    uploadFile
+  )
+  .post(createPlan);
 
 export default handler;

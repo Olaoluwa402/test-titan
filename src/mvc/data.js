@@ -370,23 +370,7 @@ module.exports = {
   ],
   users: [
     {
-      email: "john@example.com",
-      password: "12345",
-    },
-    {
-      email: "ayo@example.com",
-      password: "12345",
-    },
-    {
-      email: "verify@example.com",
-      password: "12345",
-    },
-    {
-      email: "contact@example.com",
-      password: "12345",
-    },
-    {
-      email: "admin@example.com",
+      email: "admin@titanium.africa",
       password: "12345",
     },
   ],

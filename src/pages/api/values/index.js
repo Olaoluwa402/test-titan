@@ -25,7 +25,14 @@ const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getValues);
 handler
-  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"]),
+    uploadFile
+  )
   .post(createValue);
 
 export default handler;

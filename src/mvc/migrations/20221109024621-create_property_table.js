@@ -16,7 +16,7 @@ module.exports = {
       title: { type: Sequelize.STRING, allowNull: false },
       sub_title: { type: Sequelize.STRING, allowNull: false },
       description: { type: Sequelize.TEXT, allowNull: false },
-      pricing: { type: Sequelize.STRING, allowNull: false },
+      pricing: { type: Sequelize.STRING, allowNull: true },
       short_desc: { type: Sequelize.TEXT, allowNull: false },
       location: { type: Sequelize.STRING, allowNull: false },
       no_of_beds: { type: Sequelize.INTEGER, allowNull: false },

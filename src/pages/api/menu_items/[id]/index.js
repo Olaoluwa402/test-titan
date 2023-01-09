@@ -29,7 +29,13 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .get(getMenuItem);
 
 handler
@@ -38,13 +44,19 @@ handler
     cors(),
     cookieParser(),
     protect,
-    authorizeUser(["admin"]),
+    authorizeUser(["admin", "super-admin"]),
     uploadFile
   )
   .put(updateMenuItem);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .delete(deleteMenuItems);
 
 export default handler;

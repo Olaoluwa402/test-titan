@@ -29,7 +29,14 @@ const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getAllServicesMenu);
 handler
-  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"]),
+    uploadFile
+  )
   .post(createServiceMenu);
 
 export default handler;

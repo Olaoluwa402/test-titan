@@ -25,6 +25,15 @@ const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getTeams);
 
-handler.use(morgan("dev"), cors(), cookieParser(), uploadFile).post(createTeam);
+handler
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    uploadFile,
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
+  .post(createTeam);
 
 export default handler;

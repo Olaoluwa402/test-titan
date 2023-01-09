@@ -15,6 +15,14 @@ import cookieParser from "cookie-parser";
 // route handler middleware
 const handler = nc({ onError });
 
-handler.use(morgan("dev"), cors(), cookieParser()).post(register);
+handler
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["super-admin"])
+  )
+  .post(register);
 
 export default handler;

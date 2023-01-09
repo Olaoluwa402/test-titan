@@ -5,7 +5,10 @@ const Quotation = db.define(
   "quotations",
   {
     title: { type: DataTypes.STRING, allowNull: false },
-    detail: { type: DataTypes.TEXT, allowNull: false },
+    phone: { type: DataTypes.STRING, allowNull: false },
+    fullName: { type: DataTypes.STRING, allowNull: false },
+    email: { type: DataTypes.STRING, allowNull: false },
+    createdAt: { type: DataTypes.DATE },
   },
   {}
 );

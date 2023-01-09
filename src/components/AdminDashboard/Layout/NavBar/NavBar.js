@@ -63,10 +63,12 @@ const NavBar = () => {
               </li>
             </ul>
 
-            <Link href="/admin/notifications">
-              <button className="max-w-fit bg-peppermartDark80 rounded-xl text-white px-6 py-3 hover:opacity-60 mt-3">
-                View All
-              </button>
+            <Link href="/admin/notifications" passHref>
+              <a>
+                <button className="max-w-fit bg-peppermartDark80 rounded-xl text-white px-6 py-3 hover:opacity-60 mt-3">
+                  View All
+                </button>
+              </a>
             </Link>
           </div>
         </div>

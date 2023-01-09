@@ -18,7 +18,15 @@ import cookieParser from "cookie-parser";
 // route handler middleware
 const handler = nc({ onError });
 
-handler.use(morgan("dev"), cors(), cookieParser()).get(getQuotations);
 handler.use(morgan("dev"), cors(), cookieParser()).post(createQuotation);
+handler
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
+  .get(getQuotations);
 
 export default handler;

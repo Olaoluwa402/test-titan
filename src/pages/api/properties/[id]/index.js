@@ -36,13 +36,19 @@ handler
     cors(),
     cookieParser(),
     protect,
-    authorizeUser(["admin"]),
+    authorizeUser(["admin", "super-admin"]),
     uploadFile
   )
   .put(updateProperty);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .delete(deleteProperty);
 
 export default handler;

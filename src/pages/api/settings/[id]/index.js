@@ -20,15 +20,33 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .get(getSetting);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .put(updateSetting);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .delete(deleteSetting);
 
 export default handler;

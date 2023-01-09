@@ -1,5 +1,5 @@
 import Head from "next/head";
-// import { UseEffect } from "react";
+import { useState } from "react";
 import Layout from "../components/Layout/Layout";
 import Hero from "../components/Home/Hero/Hero";
 import About from "../components/Home/About/About";
@@ -13,7 +13,7 @@ import Modal from "../components/Modals/CustomModal/CustomModal";
 import Spinner from "../components/Spinner/Spinner";
 import Lottie from "lottie-react";
 import congratulation from "../asset/Lottie/91771-spinning-circles-loading-animation.json";
-// import Success from "../components/Success/Success";
+import CreateQuote from "../components/Home/Quote/CreateQuote";
 const Home = () => {
   const store = useSelector((store) => store.homeData);
   const { loading, data } = store;
@@ -37,7 +37,7 @@ const Home = () => {
             <link rel="icon" href="/favicon.ico" />
           </Head>
 
-          <Hero />
+          <Hero /> 
           <About />
           <Properties properties={data.properties} />
           <Team teams={data.teams} />

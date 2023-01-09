@@ -29,7 +29,14 @@ const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getFacilities);
 handler
-  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"]),
+    uploadFile
+  )
   .post(createFacility);
 
 export default handler;

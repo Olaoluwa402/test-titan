@@ -11,14 +11,16 @@ import { deleteText } from "../../components/FsUtil.js";
 
 const createFacility = catchAsyncErrors(async (req, res, next) => {
   const icon = req.file.filename;
-  const { title, onMaissonete, onTypicalFloor, propertyId } = req.body;
+  const { title, onMaissonete, propertyId } = req.body;
 
   //create facility
   const facility = await Facility.create({
     icon,
     title,
-    onMaissonete,
-    onTypicalFloor,
+    onMaissonete:
+      onMaissonete && onMaissonete === "maissonete" ? onMaissonete : null,
+    onTypicalFloor:
+      onMaissonete && onMaissonete === "typicalfloor" ? onMaissonete : null,
     propertyId,
   });
 

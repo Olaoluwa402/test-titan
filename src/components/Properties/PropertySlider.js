@@ -78,7 +78,9 @@ function Properties({ properties }) {
                   </a>
                 </Link>
 
-                <h2 className={styles.amount}>₦{property.pricing}</h2>
+                <h2 className={styles.amount}>
+                  {property.pricing && `₦${property.pricing}`}
+                </h2>
                 <p className={styles.cardText}>{property.short_desc}</p>
                 <hr />
                 <div className={styles.extrainfo}>

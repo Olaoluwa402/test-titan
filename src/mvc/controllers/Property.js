@@ -12,6 +12,9 @@ import { deleteText } from "../../components/FsUtil.js";
 // @access Private - admin
 
 const createProperty = catchAsyncErrors(async (req, res, next) => {
+  if (!req.file) {
+    return next(new ErrorHandler("No file seleceted"), 404);
+  }
   const image = req.file.filename;
   const {
     video_url,

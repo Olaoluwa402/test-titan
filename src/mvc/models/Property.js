@@ -10,7 +10,7 @@ const Property = db.define(
     title: { type: DataTypes.STRING, allowNull: false },
     sub_title: { type: DataTypes.STRING, allowNull: false },
     description: { type: DataTypes.TEXT, allowNull: false },
-    pricing: { type: DataTypes.STRING, allowNull: false },
+    pricing: { type: DataTypes.STRING, allowNull: true },
     short_desc: { type: DataTypes.TEXT, allowNull: false },
     location: { type: DataTypes.STRING, allowNull: false },
     no_of_beds: { type: DataTypes.INTEGER, allowNull: false },

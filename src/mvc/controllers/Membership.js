@@ -34,25 +34,28 @@ const createMember = catchAsyncErrors(async (req, res, next) => {
 
   //check that user does not exist
   const userExist = await User.findOne({ where: { email: email } });
+
   if (userExist && userExist.MembershipId !== null) {
-    return;
+    throw new Error("Email already exist");
   }
 
   const user = await User.create({
     email,
     password: "12345",
+    role: "client",
   });
 
   //create member
   const member = await Membership.create({
     firstname,
     lastname,
+    email,
     job_title,
     phone,
     marital_Status,
     employment_status,
     clubPlanId,
-    // membershipId: user.id,
+    membershipId: user.id,
     heard_about,
     refer_friend,
   });
@@ -74,10 +77,6 @@ const getMembers = catchAsyncErrors(async (req, res, next) => {
         model: ClubPlan,
         as: "clubPlan",
       },
-      // {
-      //   model: User,
-      //   as: "referral",
-      // },
     ],
   });
   res.json({
@@ -92,7 +91,15 @@ const getMembers = catchAsyncErrors(async (req, res, next) => {
 const getMember = catchAsyncErrors(async (req, res, next) => {
   const memberId = req.query.id;
   //find member
-  const member = await Membership.findOne({ where: { id: memberId } });
+  const member = await Membership.findOne({
+    where: { id: memberId },
+    include: [
+      {
+        model: ClubPlan,
+        as: "clubPlan",
+      },
+    ],
+  });
 
   if (!member) {
     return next(new ErrorHandler("No record found"), 404);
@@ -180,6 +187,12 @@ const deleteMember = catchAsyncErrors(async (req, res, next) => {
   const member = await Membership.findOne({ where: { id: memberId } });
   if (!member) {
     return next(new ErrorHandler("No record found"), 404);
+  }
+
+  const user = await User.findOne({ where: { email: member.email } });
+  if (user) {
+    //remove found user
+    await user.destroy();
   }
   //remove found user
   await member.destroy();

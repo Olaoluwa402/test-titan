@@ -19,6 +19,14 @@ import cookieParser from "cookie-parser";
 const handler = nc({ onError });
 
 handler.use(morgan("dev"), cors(), cookieParser()).get(getClubPlans);
-handler.use(morgan("dev"), cors(), cookieParser()).post(createClubPlan);
+handler
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
+  .post(createClubPlan);
 
 export default handler;

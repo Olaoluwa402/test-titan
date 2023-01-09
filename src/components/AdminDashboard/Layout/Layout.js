@@ -1,17 +1,33 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import SideBar from "./SideBar/SideBar";
 import NavBar from "./NavBar/NavBar";
+import { ToastContainer } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 import styles from "./Layout.module.css";
 
 const Layout = ({
-  title = "Peppermart",
-  description = "peppermart description",
+  title = "Titanium",
+  description = "Titanium description",
   keywords = "description",
   url = "",
   image = "",
   children,
 }) => {
+  const router = useRouter();
+  //get store
+  const store = useSelector((store) => store.userLogin);
+  const { userInfo } = store;
+
+  useEffect(() => {
+    if (!userInfo) {
+      router.push("/login");
+    }
+  }, [router, userInfo]);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -36,6 +52,19 @@ const Layout = ({
 
       <NavBar />
       <SideBar />
+      {/*message alert  */}
+      <ToastContainer
+        position="top-left"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <main className={`${styles.main}`}>{children}</main>
     </div>
   );

@@ -31,7 +31,14 @@ handler
   .use(morgan("dev"), cors(), cookieParser())
   .get(getAllPropertyAddedAdvantage);
 handler
-  .use(morgan("dev"), cors(), cookieParser(), uploadFile)
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"]),
+    uploadFile
+  )
   .post(createPropertyAddedAdvantage);
 
 export default handler;

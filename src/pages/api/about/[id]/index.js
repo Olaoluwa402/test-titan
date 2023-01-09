@@ -13,23 +13,30 @@ import {
 import { upload } from "../../../../components/Multer.js";
 // import selectOption from "../../../components/selectOptions";
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
-// upload to server
-let uploadFile = upload.single("image");
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
 
 import morgan from "morgan";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
+// upload to server
+let uploadFile = upload.single("image");
+
 // route handler middleware
 const handler = nc({ onError });
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .get(getAbout);
 
 handler
@@ -38,13 +45,19 @@ handler
     cors(),
     cookieParser(),
     protect,
-    authorizeUser(["admin"]),
+    authorizeUser(["admin", "super-admin"]),
     uploadFile
   )
   .put(updateAbout);
 
 handler
-  .use(morgan("dev"), cors(), cookieParser(), protect, authorizeUser(["admin"]))
+  .use(
+    morgan("dev"),
+    cors(),
+    cookieParser(),
+    protect,
+    authorizeUser(["admin", "super-admin"])
+  )
   .delete(deleteAbout);
 
 export default handler;

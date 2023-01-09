@@ -8,6 +8,7 @@ import csrf from "csurf";
 import { User } from "../models/central.js";
 
 const protect = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.headers, "reqHeader");
   let token;
   if (
     req.headers.authorization &&
@@ -16,7 +17,7 @@ const protect = catchAsyncErrors(async (req, res, next) => {
     token = req.headers.authorization.split(" ")[1];
 
     try {
-      const decoded = await JWT.verify(token, process.env.JWT_SECRET);
+      const decoded = JWT.verify(token, process.env.JWT_SECRET);
 
       const user = await User.findOne({ where: { id: decoded.id } });
 

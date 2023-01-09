@@ -15,9 +15,6 @@ const login = catchAsyncErrors(async (req, res, next) => {
   const user = await User.scope("withPassword").findOne({
     where: { email: email },
   });
-
-  console.log(user, "login");
-
   //   check for password match
   const matchPassword = async function (passwordToBeVerified) {
     return await bcrypt.compare(passwordToBeVerified, user.password);
@@ -43,12 +40,11 @@ const login = catchAsyncErrors(async (req, res, next) => {
 // @access Public
 
 const register = catchAsyncErrors(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { email, password, role } = req.body;
 
   try {
     //check that user does not exist
     const userExist = await User.findOne({ where: { email: email } });
-    console.log("userExist", userExist);
     if (userExist) {
       throw new Error("Email already exist");
     }
@@ -57,6 +53,7 @@ const register = catchAsyncErrors(async (req, res, next) => {
     const user = await User.create({
       email,
       password,
+      role,
     });
 
     res.status(200).json({
@@ -85,10 +82,6 @@ const getUsers = catchAsyncErrors(async (req, res, next) => {
   //find all users
   const users = await User.findAll({
     include: [
-      {
-        model: Membership,
-        as: "referrals",
-      },
       {
         model: Property,
         as: "properties",
@@ -123,15 +116,32 @@ const getUser = catchAsyncErrors(async (req, res, next) => {
 
 const updateUserRole = catchAsyncErrors(async (req, res, next) => {
   const userId = req.query.id;
-  const { role } = req.body;
+  const { role, password, previousPassword } = req.body;
 
   //find all users
-  const user = await User.findOne({ id: userId });
+  const user = await User.scope("withPassword").findOne({
+    where: { id: userId },
+  });
+
   if (!user) {
     return next(new ErrorHandler("No record found"), 404);
   }
-
+  //update role
   user.role = role && user.role !== role ? role : user.role;
+
+  if (password && previousPassword) {
+    //   check for previous password match
+    const matchPassword = async function (passwordToBeVerified) {
+      return await bcrypt.compare(passwordToBeVerified, user.password);
+    };
+    const isMatched = await matchPassword(previousPassword);
+    console.log(userId, role, previousPassword, user.password, "role");
+    if (!isMatched) {
+      return next(new ErrorHandler("Incorrect previous password"), 400);
+    }
+    user.password = password;
+  }
+
   //save the updated record
   const updatedUser = await user.save();
   res.status(200).json({
@@ -146,10 +156,16 @@ const updateUserRole = catchAsyncErrors(async (req, res, next) => {
 const deleteUser = catchAsyncErrors(async (req, res, next) => {
   const userId = req.query.id;
   //find the user
-  const user = await User.findOne({ id: userId });
+  const user = await User.findOne({ where: { id: userId } });
   if (!user) {
     return next(new ErrorHandler("No record found"), 404);
   }
+
+  const member = await Membership.findOne({ where: { email: user.email } });
+  if (member) {
+    await member.destroy();
+  }
+
   //remove found user
   await user.destroy();
   res.status(200).json({
